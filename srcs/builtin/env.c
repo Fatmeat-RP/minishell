@@ -10,36 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtins.h>
+#include <minishell.h>
 
-//#include <stdio.h>
-//#include <stdlib.h>
-
-/*typedef struct s_instance
-**{
-**	char	**envp;
-**	char	*prompt;
-**}		t_instance;*/
-
-void	built_in_env(t_instance *instance)
+int	built_in_env(t_instance *instance)
 {
 	size_t	i;
 
-	i = -1;
-	while (instance->envp[++i])
+	i = 0;
+	if (instance->envp == NULL)
+		return (-1)
+	while (instance->envp[i])
 	{
 		printf("%s\n", instance->envp[i]);
+		i++;
 	}
+	return (0);
 }
-
-/*int	main(int ac, char **av, char **env)
-**{
-**	(void)ac;
-**	(void)av;
-**	t_instance *inst;
-**
-**	inst = malloc(sizeof(t_instance));
-**	inst->envp = env;
-**	built_in_env(inst);
-**	return (0);
-}*/

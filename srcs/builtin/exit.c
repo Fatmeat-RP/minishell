@@ -10,18 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtin.h>
+#include <minishell.h>
 
-int	main(int ac, char **av)
+int	exit_builtin(void)
 {
-	pid_t pid;
-
-	pid = getppid();
-	if (ac == 2)
-	{
-		kill(pid, SIGKILL);
-		return (ft_atoi(av[1]));
-	}
-	kill(pid, SIGKILL);
+	kill(0, SIGKILL);
 	return (0);
 }

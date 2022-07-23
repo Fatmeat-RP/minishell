@@ -69,11 +69,11 @@ t_builtin	*init_built2(t_builtin *built)
 	built->iter = built->iter->next;
 	built->iter = malloc(sizeof(t_btin));
 	built->iter->name = ft_strdup("env");
-	built->first->fun = env;
+	built->first->fun = built_in_env;
 	built->iter = built->iter->next;
 	built->iter = malloc(sizeof(t_btin));
 	built->iter->name = ft_strdup("pwd");
-	built->first->fun = pwd;
+	built->first->fun = built_in_pwd;
 	built->iter = built->iter->next;
 	built->iter = malloc(sizeof(t_btin));
 	built->iter->name = ft_strdup("unset");
@@ -114,13 +114,10 @@ int	if_line(t_instance *instance)
 	nb_pipe = pipe_counter(parse);
 	exec = struct2(parse, nb_pipe, instance->envp);
 	parse->iter = parse->first;
-	if (!exec)
-	{
-		cleaner(parse);
-	    return(-1);
-	}
-	execution(exec, instance);
 	cleaner(parse);
+	if (!exec)
+	    return(-1);
+	chose_exec(exec, instance);
 	exec_cleaner(exec);
 	return (0);
 }

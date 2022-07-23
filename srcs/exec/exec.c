@@ -49,10 +49,13 @@ static int	execution_pipe(t_control_exec *exes, t_instance *instance)
 
 int	chose_exec(t_control_exec *exes, t_instance *instance)
 {
+	if (!exes->first)
+		return (-1);
 	if (exes->first->next == NULL)
 		return (execution_solo(exes, instance));
 	else
 		return (execution_pipe(exes, instance));
+	return (0);
 }
 
 /*

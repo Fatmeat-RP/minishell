@@ -250,6 +250,10 @@ t_control_parse		*parse(t_control_parse *parsing, size_t x, char **env);
 
 /* ----- builtins ---------------------------------------------------------- */
 
+int					built_in_pwd(void);
+int					exit_builtin(void);
+int					built_in_env(t_instance *instance);
+
 /* ----- parsing ----------------------------------------------------------- */
 
 t_control_parse		*parsing(char *line, char **envp);
