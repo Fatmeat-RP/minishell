@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parsing/minishell.h"
+#include <minishell.h>
 
 t_parse	*parse_last(t_control_parse *lst)
 {

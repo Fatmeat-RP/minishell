@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-int redirect_in(t_exec *cmd)
+static int redirect_in(t_exec *cmd)
 {
 	int i;
 	int	fd;
@@ -31,7 +31,20 @@ int redirect_in(t_exec *cmd)
 		dup2(fd, STDIN_FILENO);
 		return (i);
 	}
-	return (-2);
+	return (0);
+}
+
+void	redir_in_error(t_exec *cmd)
+{
+	if (redirect_in(cmd) == -1)
+	{
+		write(2, "minishell: ", 12);
+		write(2, cmd->in[line_counter(cmd->in)],
+			ft_strlen(cmd->in[line_counter(cmd->in)]));
+		write(2, ": No such file or directory\n", 29);
+		g_status = -1;
+		exit (g_status);
+	}
 }
 
 int redirect_out(t_exec *cmd)
@@ -58,34 +71,39 @@ int redirect_out(t_exec *cmd)
 	return (0);
 }
 
-int here_doc(t_exec *cmd)
+static int utils_hdoc(t_exec *cmd, int pipefd[2])
 {
 	char	*line;
+
+	close(pipefd[0]);
+	dup2(pipefd[1], STDOUT_FILENO);
+	line = readline("heredoc> ");
+	write(pipefd[1], line, ft_strlen(line));
+	while (line != NULL || ft_strncmp(line, cmd->limiter, ft_strlen(cmd->limiter)) != 0)
+	{
+		line = readline("heredoc> ");
+		write(pipefd[1], line, ft_strlen(line));
+	}
+	exit (0);
+}
+
+int here_doc(t_exec *cmd)
+{
 	int		pipefd[2];
 	pid_t	pid;
 
-	line = 1;
+	if (pipe(pipefd) == -1)
+		return (-1);
 	pid = fork();
 	if (pid == -1)
-		return(-1);
+		return (-1);
 	if (pid)
-	{
-		close(pipefd[0]);
-		dup2(pipefd[1], STDOUT_FILENO);
-		while (line != NULL && ft_strncmp(line, cmd->limiter, ft_strlen(cmd->limiter)) != 0)
-		{
-			line = readline("heredoc> ");
-			write(pipefd[1], line, ft_strlen(line));
-			free(line);
-		}
-		if (line)
-			free(line);
-		exit (0);
-	}
+		utils_hdoc(cmd, pipefd);
 	else
 	{
 		close(pipefd[1]);
 		dup2(pipefd[0], STDIN_FILENO);
+		waitpid(pid, &g_status, 0);
 	}
-	return (pipefd[0]);
+	return (0);
 }

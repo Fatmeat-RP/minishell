@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 #include <unistd.h>
 
 void	flaggeur_file_name(t_control_parse *parsing)

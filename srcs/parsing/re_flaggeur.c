@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 int	re_flaggeur_2(t_control_parse *parsing, int tem_flag)
 {

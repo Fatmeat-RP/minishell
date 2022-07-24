@@ -15,7 +15,7 @@
 void	sig_int_handler(int signum)
 {
 	(void)signum;
-	printf("\n");
+	write(2, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();

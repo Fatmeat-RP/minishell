@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 t_control_parse	*set_pars(t_control_parse *pars, char **line_tab, char **env)
 {

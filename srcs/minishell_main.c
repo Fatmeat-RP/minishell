@@ -14,6 +14,88 @@
 
 int g_status;
 
+static t_builtin	*init_built2(t_builtin *built)
+{
+	built->iter->name = ft_strdup("export");
+	built->iter->fun = builtin_export;
+	built->iter->next = malloc(sizeof(t_btin));
+	built->iter = built->iter->next;
+	built->iter->name = ft_strdup("env");
+	built->iter->fun = built_in_env;
+	built->iter->next = malloc(sizeof(t_btin));
+	built->iter = built->iter->next;
+	built->iter->name = ft_strdup("pwd");
+	built->iter->fun = built_in_pwd;
+	built->iter->next = malloc(sizeof(t_btin));
+	built->iter = built->iter->next;
+	built->iter->name = ft_strdup("unset");
+	built->iter->fun = builtin_unset;
+	built->iter->next = NULL;
+	built->iter = built->first;
+	return (built);
+}
+
+static t_builtin	*init_builtin(void)
+{
+	t_builtin	*built;
+
+	built = malloc(sizeof(t_builtin));
+	built->first = malloc(sizeof(t_btin));
+	built->iter = built->first;
+	built->iter->name = ft_strdup("cd");
+	built->iter->fun = builtin_cd;
+	built->iter->next = malloc(sizeof(t_btin));
+	built->iter = built->iter->next;
+	built->iter->name = ft_strdup("exit");
+	built->iter->fun = exit_builtin;
+	built->iter->next = malloc(sizeof(t_btin));
+	built->iter = built->iter->next;
+	built->iter->name = ft_strdup("echo");
+	built->iter->fun = builtin_echo;
+	built->iter->next = malloc(sizeof(t_btin));
+	built->iter = built->iter->next;
+	return (init_built2(built));
+}
+
+static t_instance *init_minishell(char **envp, int ac, char **av)
+{
+	t_instance	*instance;
+
+	(void)ac;
+	(void)av;
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_int_handler);
+	instance = malloc(sizeof(t_instance *));
+	if (!instance)
+		return (NULL);
+	instance->builtin = init_builtin();
+	instance->envp = envp;
+	return (instance);
+}
+
+static int	if_line(t_instance *instance)
+{
+	t_control_parse	*parse;
+	t_control_exec	*exec;
+	int				nb_pipe;
+
+	nb_pipe = 0;
+	add_history(instance->line);
+	parse = parsing(instance->line, instance->envp);
+	if (control_parse(parse) == -1)
+	    return (-1);
+	parse->iter = parse->first;
+	nb_pipe = pipe_counter(parse);
+	exec = structy(parse, nb_pipe, instance->envp);
+	parse->iter = parse->first;
+	cleaner(parse);
+	if (!exec)
+	    return(-1);
+	chose_exec(exec, instance);
+	exec_cleaner(exec);
+	return (0);
+}
+
 int main(int ac, char **av, char **envp)
 {
 	t_instance	*instance;
@@ -30,94 +112,8 @@ int main(int ac, char **av, char **envp)
 			return (free_instance(instance, -1));
 		}
 		else if (instance->line[0] != 0)
-		{
-			if (ft_strncmp(instance->line, "exit", 5) == 0)
-				return (free_instance(instance, -1));
 			if_line(instance);
-		}
 	}
 	rl_clear_history();
 	return (free_instance(instance, 0));
-}
-
-t_builtin	*init_builtin(void)
-{
-	t_builtin	*built;
-
-	built = malloc(sizeof(t_builtin));
-	built->first = malloc(sizeof(t_btin));
-	built->iter = built->first;
-	built->first->name = ft_strdup("cd");
-	built->first->fun = builtin_cd;
-	built->iter = built->iter->next;
-	built->iter = malloc(sizeof(t_btin));
-	built->iter->name = ft_strdup("exit");
-	built->first->fun = exit_builtin;
-	built->iter = built->iter->next;
-	built->iter = malloc(sizeof(t_btin));
-	built->iter->name = ft_strdup("echo");
-	built->first->fun = builtin_echo;
-	built->iter = built->iter->next;
-	return (init_built2(built));
-}
-
-t_builtin	*init_built2(t_builtin *built)
-{
-	built->iter = malloc(sizeof(t_btin));
-	built->iter->name = ft_strdup("export");
-	built->first->fun = export;
-	built->iter = built->iter->next;
-	built->iter = malloc(sizeof(t_btin));
-	built->iter->name = ft_strdup("env");
-	built->first->fun = built_in_env;
-	built->iter = built->iter->next;
-	built->iter = malloc(sizeof(t_btin));
-	built->iter->name = ft_strdup("pwd");
-	built->first->fun = built_in_pwd;
-	built->iter = built->iter->next;
-	built->iter = malloc(sizeof(t_btin));
-	built->iter->name = ft_strdup("unset");
-	built->first->fun = unset;
-	built->iter->next = NULL;
-	built->iter = built->first;
-	return (built);
-}
-
-t_instance *init_minishell(char **envp, int ac, char **av)
-{
-	t_instance	*instance;
-
-	(void)ac;
-	(void)av;
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_int_handler);
-	instance = malloc(sizeof(t_instance *));
-	if (!instance)
-		return (NULL);
-	instance->builtin = init_builtin();
-	instance->envp = envp;
-	return (instance);
-}
-
-int	if_line(t_instance *instance)
-{
-	t_control_parse	*parse;
-	t_control_exec	*exec;
-	int				nb_pipe;
-
-	nb_pipe = 0;
-	add_history(instance->line);
-	parse = parsing(instance->line, instance->envp);
-	if (control_parse(parse) == -1)
-	    return (-1);
-	parse->iter = parse->first;
-	nb_pipe = pipe_counter(parse);
-	exec = struct2(parse, nb_pipe, instance->envp);
-	parse->iter = parse->first;
-	cleaner(parse);
-	if (!exec)
-	    return(-1);
-	chose_exec(exec, instance);
-	exec_cleaner(exec);
-	return (0);
 }

@@ -1,33 +1,6 @@
 #include <minishell.h>
 
-int	forklift(t_exec *cmd, char **envp)
-{
-	int	pid;
-	int	pipefd[2];
-
-	if (pipe(pipefd) == -1)
-		return (-1);
-	pid = fork();
-	if (pid == -1)
-		return (-1);
-	if (pid == 0)
-	{
-		redirect_in_pipe(cmd, pipefd);
-		close(pipefd[0]);
-		dup2(pipefd[1], STDOUT_FILENO);
-		redirect_out(cmd);
-		exec_one_cmd(cmd, envp);
-	}
-	else
-	{
-		close(pipefd[1]);
-		dup2(pipefd[0], STDIN_FILENO);
-		waitpid(pid, &g_status, 0);
-	}	
-	return (pipefd[0]);
-}
-
-int	exec_cmd_pipe(t_exec *cmd, t_instance *instance)
+int	execuction(t_exec *cmd, t_instance *instance)
 {
 	if (cmd->is_builtin == true)
 	{
@@ -43,4 +16,33 @@ int	exec_cmd_pipe(t_exec *cmd, t_instance *instance)
 		exit (g_status);
 	}
 	exit (EXIT_FAILURE);
+}
+
+int	forklift(t_exec *cmd, t_instance *instance)
+{
+	int	pid;
+	int	pipefd[2];
+
+	if (pipe(pipefd) == -1)
+		return (-1);
+	pid = fork();
+	if (pid == -1)
+		return (-1);
+	if (cmd->is_here_doc == true)
+		here_doc(cmd);
+	if (pid == 0)
+	{
+		redir_in_error(cmd);
+		close(pipefd[0]);
+		dup2(pipefd[1], STDOUT_FILENO);
+		redirect_out(cmd);
+		execuction(cmd, instance);
+	}
+	else
+	{
+		close(pipefd[1]);
+		dup2(pipefd[0], STDIN_FILENO);
+		waitpid(pid, &g_status, 0);
+	}	
+	return (pipefd[0]);
 }

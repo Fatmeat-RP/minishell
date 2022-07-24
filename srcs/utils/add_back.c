@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parsing/minishell.h"
+#include <minishell.h>
 
 void	parse_add_back(t_control_parse *lst, t_parse *add)
 {
@@ -27,7 +27,7 @@ void	parse_add_back(t_control_parse *lst, t_parse *add)
 
 void	parse_add_just_back(t_control_parse *lst, t_parse *add)
 {
-	t_control_parse	*dec;
+	t_parse	*dec;
 
 	dec = lst->iter->next;
 	if (lst->first == NULL)
@@ -77,6 +77,8 @@ void	ft_lstadd_just_back(t_var *lst, t_var *new)
 	if (!tmp)
 		lst = new;
 	else
+	{
 		ft_lstadd_back(&lst, new);
 		new->next = tmp;
+	}
 }

@@ -2,7 +2,7 @@
 
 int	builtin_cd(char **arg, char **envp)
 {
-	void (envp)
+	(void)envp;
 	if (chdir(arg[1]) == -1)
 	{
 		write(1, "minishell: ", 12);

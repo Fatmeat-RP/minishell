@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 int	cut_quote(t_parse *node, int nb_q, size_t i, size_t j)
 {

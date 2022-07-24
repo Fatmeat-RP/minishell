@@ -99,7 +99,7 @@ typedef enum s_bool
 typedef struct s_instance
 {
 	char		**envp;
-	char		line;
+	char		*line;
 	t_builtin	*builtin;
 }		t_instance;
 
@@ -174,9 +174,6 @@ typedef struct s_fthenorm
 /* ----- main -------------------------------------------------------------- */
 
 int					free_instance(t_instance *instance, int i);
-int					if_line(t_instance *instance);
-t_instance		    *init_minishell(char **envp);
-void			    return_prompt(t_instance *instance);
 
 /* ----- signal ------------------------------------------------------------ */
 
@@ -191,20 +188,19 @@ t_control_exec		*structy(t_control_parse *parse, int nb_pipe, char **envp);
 
 /* ----- redirect ---------------------------------------------------------- */
 
-int					redirect_in(t_exec *cmd);
 int					redirect_out(t_exec *cmd);
-int					redirect_onecmd(t_exec *cmd);
+void				redir_in_error(t_exec *cmd);
 int					line_counter(char **aos);
-int 				here_doc(t_exec *cmd);
+int					here_doc(t_exec *cmd);
 
 /* ----- execution --------------------------------------------------------- */
 
-int				    execution(t_control_exec *exes, t_instance *instance);
+int					execuction(t_exec *cmd, t_instance *instance);
 int                 allocator_counter(t_control_parse *parse_list,
 						t_exec *node, short in, short out);
 char	            **exec_split(char const *s, char c);
-void				exec_one_cmd(t_exec *cmd, char **envp);
-int					forklift(t_exec *cmd, char **envp);
+int					forklift(t_exec *cmd, t_instance *instance);
+int					chose_exec(t_control_exec *exes, t_instance *instance);
 
 /* ----- utils ------------------------------------------------------------- */
 
@@ -255,6 +251,8 @@ int					exit_builtin(char **arg, char **envp);
 int					built_in_env(char **arg, char **envp);
 int					builtin_echo(char **arg, char **envp);
 int					builtin_cd(char **arg, char **envp);
+int					builtin_export(char **arg, char **envp);
+int					builtin_unset(char **arg, char **envp);
 
 /* ----- parsing ----------------------------------------------------------- */
 

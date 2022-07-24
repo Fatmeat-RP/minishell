@@ -1,5 +1,6 @@
 #include <minishell.h>
 
+/*
 static int	looper(char **arg)
 {
 	int		i;
@@ -22,7 +23,6 @@ int	builtin_export(char **arg, char **envp)
 	size_t	size;
 
 	i = 0;
-	/* WIP not working, don't use or try it, need to work on it*/
 	while(arg[j] != NULL)
 	{
 		line = looper(arg);
@@ -31,6 +31,23 @@ int	builtin_export(char **arg, char **envp)
 			i++;
 		envp[i] = ft_strdup(arg[1]);
 		free(line);
+	}
+	return (0);
+}
+*/
+
+int	builtin_export(char **arg, char **envp)
+{
+	size_t	i;
+
+	(void)arg;
+	i = 0;
+	if (envp == NULL)
+		return (-1);
+	while (envp[i])
+	{
+		printf("%s\n", envp[i]);
+		i++;
 	}
 	return (0);
 }

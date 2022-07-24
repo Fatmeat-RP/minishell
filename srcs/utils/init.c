@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parsing/minishell.h"
+#include <minishell.h>
 
 t_parse	*init_parse(char *elem, float flag)
 {

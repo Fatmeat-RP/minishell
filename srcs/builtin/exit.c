@@ -16,6 +16,7 @@ int	exit_builtin(char **arg, char **envp)
 {
 	(void)arg;
 	(void)envp;
-	kill(0, SIGKILL);
+	write(2, "exit\n", 5);
+	exit (0);
 	return (0);
 }

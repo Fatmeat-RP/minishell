@@ -46,7 +46,6 @@ SRCS 		=	$(SRCSDIR)parse_to_exec/struct.c\
 				$(SRCSDIR)parsing/tote.c\
 				$(SRCSDIR)parsing/universal_flaggeur.c\
 				$(SRCSDIR)exec/exec.c\
-				$(SRCSDIR)exec/redir_error.c\
 				$(SRCSDIR)exec/execcmd.c\
 				$(SRCSDIR)exec/redirection.c\
 				$(SRCSDIR)utils/add_back.c\
@@ -69,7 +68,14 @@ SRCS 		=	$(SRCSDIR)parse_to_exec/struct.c\
 				$(SRCSDIR)utils/utils2.c\
 				$(SRCSDIR)utils/utils.c\
 				$(SRCSDIR)minishell_main.c\
-#				$(SRCSDIR)builtin/\
+				$(SRCSDIR)builtin/cd.c\
+				$(SRCSDIR)builtin/echo.c\
+				$(SRCSDIR)builtin/env.c\
+				$(SRCSDIR)builtin/envp_utils.c\
+				$(SRCSDIR)builtin/exit.c\
+				$(SRCSDIR)builtin/export.c\
+				$(SRCSDIR)builtin/pwd.c\
+				$(SRCSDIR)builtin/unset.c\
 
 
 OBJS 		=	${SRCS:.c=.o}
@@ -91,7 +97,8 @@ OBJS		=	$(SRCS:$(SRCSDIR)%.c=$(OBJSDIR)%.o)
 all			: 	${NAME}
 
 ${NAME}		:	${OBJS} ${DEPS} Makefile
-			@$(CC) -fsanitize=address $(OBJS) ${CFLAGS} $(HEADER) -o $(NAME) $(LIBS)
+			@$(CC) $(OBJS) ${CFLAGS} $(HEADER) -o $(NAME) $(LIBS)
+# -fsanitize=address
 
 $(OBJS)		:	$(OBJSDIR)%.o	:	$(SRCSDIR)%.c ${DEPS} Makefile
 			@mkdir -p $(OBJSDIR)

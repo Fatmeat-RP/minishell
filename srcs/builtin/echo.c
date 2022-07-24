@@ -30,6 +30,7 @@ int	builtin_echo(char **arg, char **envp)
 {
 	int	i;
 
+	(void)envp;
 	i = 1;
 	if (arg[1] && ft_strncmp(arg[1], "-n", 3) == 0)
 		looper(arg, i);

@@ -12,53 +12,73 @@
 
 #include <minishell.h>
 
-static int	execution_solo(t_control_exec *exes, t_instance *instance)
+static int	exec_one_builtin(t_exec *cmd, t_instance *instance)
+{
+	if (cmd->is_here_doc == true)
+		here_doc(cmd);
+	redir_in_error(cmd);
+	redirect_out(cmd);
+	while(instance->builtin->iter->next
+		&& ft_strncmp(cmd->cmd[0], instance->builtin->iter->name, ft_strlen(instance->builtin->iter->name)) != 0)
+		instance->builtin->iter = instance->builtin->iter->next;
+	g_status = (*instance->builtin->iter->fun)(cmd->cmd, instance->envp);
+	return (g_status);
+}
+
+static int	exec_one_cmd(t_exec *cmd, t_instance *instance)
 {
 	pid_t	pid;
-	int		pipefd[2];
- 
-	if (pipe(pipefd) == -1)
-		return (-1);
+
 	pid = fork();
 	if (pid == -1)
 		return (-1);
-	if (exes->first->is_here_doc == true)
-		here_doc(exes->first);
+	if (cmd->is_here_doc == true)
+		here_doc(cmd);
 	if (pid == 0)
-		exec_one_cmd(exes->first, instance->envp);
+	{
+		signal(SIGINT, sig_int_child_handler);
+		signal(SIGQUIT, sig_quit_handler);
+		redir_in_error(cmd);
+		redirect_out(cmd);
+		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
+		exit(g_status);
+	}
 	else
 		waitpid(pid, &g_status, 0);
 	return (g_status);
+}
+
+static int	execution_solo(t_exec *cmd, t_instance *instance)
+{
+	if (cmd->is_builtin == true)
+		return (exec_one_builtin(cmd, instance));
+	else
+		return (exec_one_cmd(cmd, instance));
 }
 
 static int	execution_pipe(t_control_exec *exes, t_instance *instance)
 {
 	while (exes->iter != NULL)
 	{
-		forklift(exes->iter, instance->envp);
+		forklift(exes->iter, instance);
 		exes->iter = exes->iter->next;
 	}
-	dup2(0, STDIN_FILENO);
 	return (0);
 }
 
 int	chose_exec(t_control_exec *exes, t_instance *instance)
 {
+	int ret;
+
+	ret = 0;
 	if (!exes->first)
 		return (-1);
 	if (exes->first->next == NULL)
-		return (execution_solo(exes, instance));
+		ret = execution_solo(exes->first, instance);
 	else
-		return (execution_pipe(exes, instance));
-	return (0);
+		ret = execution_pipe(exes, instance);
+	dup2(0, STDIN_FILENO);
+	dup2(1, STDOUT_FILENO);
+	return (ret);
 }
 
-void	exec_one_cmd(t_exec *cmd, char **envp)
-{
-	signal(SIGINT, sig_int_child_handler);
-	signal(SIGQUIT, sig_quit_handler);
-	redir_in_error(cmd);
-	redirect_out(cmd);
-	g_status = execve(cmd->cmd[0], cmd->cmd, envp);
-	exit(g_status);
-}

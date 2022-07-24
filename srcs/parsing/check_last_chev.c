@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 #include <unistd.h>
 
 t_bool	check_last_chev(char *line)

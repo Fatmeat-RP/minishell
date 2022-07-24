@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
 t_control_parse	*split_block_2(t_control_parse *new_lst, char **tab)
 {
