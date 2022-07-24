@@ -6,7 +6,7 @@
 #    By: acarle-m <acarle-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/21 18:00:59 by cben-bar          #+#    #+#              #
-#    Updated: 2022/07/09 01:21:51 by acarle-m         ###   ########.fr        #
+#    Updated: 2022/07/24 04:44:43 by acarle-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS 		=	$(SRCSDIR)parse_to_exec/struct.c\
 				$(SRCSDIR)parsing/tote.c\
 				$(SRCSDIR)parsing/universal_flaggeur.c\
 				$(SRCSDIR)exec/exec.c\
+				$(SRCSDIR)exec/redir_error.c\
 				$(SRCSDIR)exec/execcmd.c\
 				$(SRCSDIR)exec/redirection.c\
 				$(SRCSDIR)utils/add_back.c\
