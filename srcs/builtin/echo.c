@@ -3,75 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cben-bar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acarle-m <acarle-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:34:51 by cben-bar          #+#    #+#             */
-/*   Updated: 2022/07/02 14:19:36 by cben-bar         ###   ########.fr       */
+/*   Updated: 2022/07/24 04:17:32 by acarle-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtins.h>
+#include <minishell.h>
 
-static t_bool	is_option(char *option)
+static void	looper(char **arg, int i)
 {
-	size_t	i;
-
-	i = 2;
-	if (option[0] == '-' && option[1] == 'n')
+	if (arg[i] == NULL)
+		return ;
+	while (arg[i])
 	{
-		if (option[i] == '\0')
-			return (true);
-		else
-		{
-			while (option[i])
-			{
-				if (option[i] != 'n')
-					return (false);
-				i++;
-			}
-		}
-		return (true);
+		write(1, arg[i], ft_strlen(arg[i]));
+		i++;
+		if (arg[i])
+			write(1, " ", 2);
 	}
-	return (false);
+	return ;
 }
 
-static	char	*new_line(char *old_line, size_t mark)
+int	builtin_echo(char **arg, char **envp)
 {
-	while (old_line[mark] == ' ')
-		mark++;
-	return (&old_line[mark]);
-}
+	int	i;
 
-static int	built_in_echo(char *line, size_t option)
-{
-	if (option)
-		printf("%s", line);
+	i = 1;
+	if (arg[1] && ft_strncmp(arg[1], "-n", 3) == 0)
+		looper(arg, i);
 	else
-		printf("%s\n", line);
-	return (0);
-}
-
-void	built_in_echo(char *line)
-{
-	char	**splited_line;
-	size_t	i;
-	char	*tmp;
-
-	splited_line = ft_split(line, ' ');
-	i = 0;
-	i = ft_strlen(splited_line[0]);
-	if (is_option(splited_line[0]))
 	{
-		tmp = new_line(line, i);
-		built_in_echo(tmp, 1);
+		looper(arg, ++i);
+		write(1, "\n", 3);
 	}
-	else
-		built_in_echo(line, 0);
-}
-
-int	main(int ac, char **av)
-{
-	(void)ac;
-	call_built_in_echo(av[2]);
 	return (0);
 }

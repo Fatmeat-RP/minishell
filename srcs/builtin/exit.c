@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cben-bar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acarle-m <acarle-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 14:06:32 by cben-bar          #+#    #+#             */
-/*   Updated: 2022/07/02 14:06:35 by cben-bar         ###   ########.fr       */
+/*   Updated: 2022/07/24 02:40:45 by acarle-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	exit_builtin(void)
+int	exit_builtin(char **arg, char **envp)
 {
+	(void)arg;
+	(void)envp;
 	kill(0, SIGKILL);
 	return (0);
 }

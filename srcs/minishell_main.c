@@ -6,7 +6,7 @@
 /*   By: acarle-m <acarle-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 20:20:54 by acarle-m          #+#    #+#             */
-/*   Updated: 2022/07/21 00:45:07 by acarle-m         ###   ########.fr       */
+/*   Updated: 2022/07/24 04:19:06 by acarle-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_builtin	*init_builtin(void)
 	built->first = malloc(sizeof(t_btin));
 	built->iter = built->first;
 	built->first->name = ft_strdup("cd");
-	built->first->fun = cd;
+	built->first->fun = builtin_cd;
 	built->iter = built->iter->next;
 	built->iter = malloc(sizeof(t_btin));
 	built->iter->name = ft_strdup("exit");
@@ -56,7 +56,7 @@ t_builtin	*init_builtin(void)
 	built->iter = built->iter->next;
 	built->iter = malloc(sizeof(t_btin));
 	built->iter->name = ft_strdup("echo");
-	built->first->fun = echo;
+	built->first->fun = builtin_echo;
 	built->iter = built->iter->next;
 	return (init_built2(built));
 }

@@ -6,7 +6,7 @@
 /*   By: acarle-m <acarle-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 19:15:22 by cben-bar          #+#    #+#             */
-/*   Updated: 2022/07/18 02:24:23 by acarle-m         ###   ########.fr       */
+/*   Updated: 2022/07/24 04:29:10 by acarle-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ struct s_builtin
 struct s_btin
 {
 	char	*name;
-	int		(*fun)(char **arg);
+	int		(*fun)(char **arg, char **envp);
 	t_btin	*next;
 };
 
@@ -191,8 +191,8 @@ t_control_exec		*structy(t_control_parse *parse, int nb_pipe, char **envp);
 
 /* ----- redirect ---------------------------------------------------------- */
 
-int					redirect_in(t_exec *cmd, int pipefd[2]);
-int					redirect_out(t_exec *cmd, int pipefd[2]);
+int					redirect_in(t_exec *cmd);
+int					redirect_out(t_exec *cmd);
 int					redirect_onecmd(t_exec *cmd);
 int					line_counter(char **aos);
 int 				here_doc(t_exec *cmd);
@@ -204,7 +204,7 @@ int                 allocator_counter(t_control_parse *parse_list,
 						t_exec *node, short in, short out);
 char	            **exec_split(char const *s, char c);
 void				exec_one_cmd(t_exec *cmd, char **envp);
-int					forklift(t_exec *cmd, char **envp, int fdin);
+int					forklift(t_exec *cmd, char **envp);
 
 /* ----- utils ------------------------------------------------------------- */
 
@@ -250,9 +250,11 @@ t_control_parse		*parse(t_control_parse *parsing, size_t x, char **env);
 
 /* ----- builtins ---------------------------------------------------------- */
 
-int					built_in_pwd(void);
-int					exit_builtin(void);
-int					built_in_env(t_instance *instance);
+int					built_in_pwd(char **arg, char **envp);
+int					exit_builtin(char **arg, char **envp);
+int					built_in_env(char **arg, char **envp);
+int					builtin_echo(char **arg, char **envp);
+int					builtin_cd(char **arg, char **envp);
 
 /* ----- parsing ----------------------------------------------------------- */
 

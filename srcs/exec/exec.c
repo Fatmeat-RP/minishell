@@ -6,7 +6,7 @@
 /*   By: acarle-m <acarle-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 20:21:49 by acarle-m          #+#    #+#             */
-/*   Updated: 2022/07/21 02:11:23 by acarle-m         ###   ########.fr       */
+/*   Updated: 2022/07/24 02:36:00 by acarle-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,12 @@ static int	execution_solo(t_control_exec *exes, t_instance *instance)
 
 static int	execution_pipe(t_control_exec *exes, t_instance *instance)
 {
-	int		old_in;
-//	pid_t	pid;
-	int		fdin;
-
-	old_in = dup(STDIN_FILENO);
 	while (exes->iter != NULL)
 	{
-		fdin = forklift(exes->iter, instance->envp, fdin);
+		forklift(exes->iter, instance->envp);
 		exes->iter = exes->iter->next;
 	}
-	dup2(old_in, STDIN_FILENO);
+	dup2(0, STDIN_FILENO);
 	return (0);
 }
 
@@ -58,28 +53,11 @@ int	chose_exec(t_control_exec *exes, t_instance *instance)
 	return (0);
 }
 
-/*
-	pid = fork();
-	if (pid == -1)
-		return (-1);
-	if (pid == 0)
-		exec_one_cmd(exes->iter, instance->envp);
-	waitpid(pid, &g_status, 0);
-*/
-
 void	exec_one_cmd(t_exec *cmd, char **envp)
 {
 	signal(SIGINT, sig_int_child_handler);
 	signal(SIGQUIT, sig_quit_handler);
-	if (redirect_in(cmd) == -1 && cmd->in[0] != NULL)
-	{
-		write(1, "minishell: ", 12);
-		write(1, cmd->in[line_counter(cmd->in)],
-			ft_strlen(cmd->in[line_counter(cmd->in)]));
-		write(1, ": No such file or directory\n", 29);
-		g_status = 1;
-		exit (g_status);
-	}
+	redir_in_error(cmd);
 	redirect_out(cmd);
 	g_status = execve(cmd->cmd[0], cmd->cmd, envp);
 	exit(g_status);
