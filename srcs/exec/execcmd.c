@@ -8,14 +8,10 @@ int	execuction(t_exec *cmd, t_instance *instance)
 			&& ft_strcmp(cmd->cmd[0], instance->builtin->iter->name) != 0)
 			instance->builtin->iter = instance->builtin->iter->next;
 		g_status = (*instance->builtin->iter->fun)(cmd->cmd, instance->envp);
-		exit (g_status);
 	}
 	else
-	{
 		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
-		exit (g_status);
-	}
-	exit (EXIT_FAILURE);
+	exit (g_status);
 }
 
 int	forklift(t_exec *cmd, t_instance *instance)
@@ -44,5 +40,5 @@ int	forklift(t_exec *cmd, t_instance *instance)
 		dup2(pipefd[0], STDIN_FILENO);
 		waitpid(pid, &g_status, 0);
 	}	
-	return (pipefd[0]);
+	return (pid);
 }

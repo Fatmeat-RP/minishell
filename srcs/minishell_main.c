@@ -70,6 +70,17 @@ static t_instance *init_minishell(char **envp, int ac, char **av)
 		return (NULL);
 	instance->builtin = init_builtin();
 	instance->envp = envp;
+/*	while (envp[j] != NULL)
+	{
+		instance->envp[j] = ft_strdup(envp[j]);
+		j++;
+	}
+	while (j <= 300)
+	{
+		instance->envp[j] = NULL;
+		j++;
+	}
+	printf("initdone %p\n", instance->envp);*/
 	return (instance);
 }
 
@@ -80,13 +91,17 @@ static int	if_line(t_instance *instance)
 	int				nb_pipe;
 
 	nb_pipe = 0;
+	printf("1\n");
 	add_history(instance->line);
 	parse = parsing(instance->line, instance->envp);
+	printf("1\n");
 	if (control_parse(parse) == -1)
 	    return (-1);
 	parse->iter = parse->first;
 	nb_pipe = pipe_counter(parse);
+	printf("1\n");
 	exec = structy(parse, nb_pipe, instance->envp);
+	printf("1\n");
 	parse->iter = parse->first;
 	cleaner(parse);
 	if (!exec)
