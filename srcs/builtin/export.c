@@ -14,15 +14,19 @@ static int	looper(char **arg)
 		while (arg[1] && arg[1][i] != '=')
 		i++;
 	return (i);
-}
+}*/
 
 int	builtin_export(char **arg, char **envp)
 {
-	char	*line;
+	(void)arg;
+	(void)envp;
+/*	char	*line;
 	int		i;
 	size_t	size;
+	int		j;
 
 	i = 0;
+	j = 0;
 	while(arg[j] != NULL)
 	{
 		line = looper(arg);
@@ -31,23 +35,7 @@ int	builtin_export(char **arg, char **envp)
 			i++;
 		envp[i] = ft_strdup(arg[1]);
 		free(line);
-	}
-	return (0);
-}
-*/
-
-int	builtin_export(char **arg, char **envp)
-{
-	size_t	i;
-
-	(void)arg;
-	i = 0;
-	if (envp == NULL)
-		return (-1);
-	while (envp[i])
-	{
-		printf("%s\n", envp[i]);
-		i++;
-	}
+		j++;
+	}*/
 	return (0);
 }

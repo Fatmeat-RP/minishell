@@ -253,6 +253,7 @@ int					builtin_echo(char **arg, char **envp);
 int					builtin_cd(char **arg, char **envp);
 int					builtin_export(char **arg, char **envp);
 int					builtin_unset(char **arg, char **envp);
+char				**init_envp(char **envp);
 
 /* ----- parsing ----------------------------------------------------------- */
 

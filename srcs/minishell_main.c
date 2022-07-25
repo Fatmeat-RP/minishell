@@ -69,7 +69,7 @@ static t_instance *init_minishell(char **envp, int ac, char **av)
 	if (!instance)
 		return (NULL);
 	instance->builtin = init_builtin();
-	instance->envp = envp;
+	instance->envp = init_envp(envp);
 /*	while (envp[j] != NULL)
 	{
 		instance->envp[j] = ft_strdup(envp[j]);
