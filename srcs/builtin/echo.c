@@ -26,11 +26,11 @@ static void	looper(char **arg, int i)
 	return ;
 }
 
-int	builtin_echo(char **arg, char **envp)
+int	builtin_echo(char **arg, t_instance *instance)
 {
 	int	i;
 
-	(void)envp;
+	(void)instance;
 	i = 1;
 	if (arg[1] && ft_strncmp(arg[1], "-n", 3) == 0)
 		looper(arg, i);

@@ -1,16 +1,21 @@
 #include <minishell.h>
 
-int	builtin_unset(char **arg, char **envp)
+int	builtin_unset(char **arg, t_instance *instance)
 {
-	size_t	i;
+	int	i;
+	int	j;
 
-	(void)arg;
-	i = 0;
-	if (envp == NULL)
-		return (-1);
-	while (envp[i])
+	i = 1;
+	j = 0;
+	while (arg[i] != NULL)
 	{
-		printf("%s\n", envp[i]);
+		while (instance->envp[j])
+		{
+			if (ft_strncmp(instance->envp[j], arg[i], ft_strlen(arg[i]) == 0))
+				instance->envp = del_envp(instance->envp, j);
+			j++;
+		}
+		j = 0;
 		i++;
 	}
 	return (0);

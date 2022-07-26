@@ -150,13 +150,13 @@ struct s_builtin
 {
 	t_btin	*first;
 	t_btin	*iter;
-	size_t	*size;
+	size_t	size;
 };
 
 struct s_btin
 {
 	char	*name;
-	int		(*fun)(char **arg, char **envp);
+	int		(*fun)(char **arg, t_instance *instance);
 	t_btin	*next;
 };
 
@@ -222,6 +222,7 @@ char				*ft_itoa(int n);
 size_t				ft_strlen(char *s);
 char				**ft_split_it(char *line, char c, size_t i, int q);
 int					pipe_counter(t_control_parse *parse);
+int					free_exe(t_exec *exec);
 
 /* ----- list -------------------------------------------------------------- */
 
@@ -246,14 +247,17 @@ t_control_parse		*parse(t_control_parse *parsing, size_t x, char **env);
 
 /* ----- builtins ---------------------------------------------------------- */
 
-int					built_in_pwd(char **arg, char **envp);
-int					exit_builtin(char **arg, char **envp);
-int					built_in_env(char **arg, char **envp);
-int					builtin_echo(char **arg, char **envp);
-int					builtin_cd(char **arg, char **envp);
-int					builtin_export(char **arg, char **envp);
-int					builtin_unset(char **arg, char **envp);
+int					built_in_pwd(char **arg, t_instance *instance);
+int					exit_builtin(char **arg, t_instance *instance);
+int					built_in_env(char **arg, t_instance *instance);
+int					builtin_echo(char **arg, t_instance *instance);
+int					builtin_cd(char **arg, t_instance *instance);
+int					builtin_export(char **arg, t_instance *instance);
+int					builtin_unset(char **arg, t_instance *instance);
 char				**init_envp(char **envp);
+char				**add_envp(char **envp, char *new);
+char				*get_varname(char *new);
+char				**del_envp(char **envp, int index);
 
 /* ----- parsing ----------------------------------------------------------- */
 

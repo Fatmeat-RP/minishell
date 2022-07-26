@@ -64,6 +64,40 @@ int	test_free(t_control_exec *exec, int nb_pipe)
 
 int	free_instance(t_instance *instance, int i)
 {
+	int	j;
+
+	j = 0;
+	while (instance->envp[j])
+		free(instance->envp[j++]);
+	free(instance->envp);
+	while (instance->builtin->first->next != NULL)
+	{
+		instance->builtin->iter = instance->builtin->first->next;
+		if (i == 3)
+			free(instance->builtin->first->name);
+		free(instance->builtin->first);
+		instance->builtin->first = instance->builtin->iter;
+	}
+	free(instance->builtin->first);
+	free(instance->builtin);
 	free(instance);
 	return (i);
+}
+
+int	free_exe(t_exec *exec)
+{
+	int	i;
+
+	i = 0;
+	free(exec->limiter);
+	while(exec->cmd[i] != NULL)
+		free(exec->cmd[i++]);
+	i = 0;
+	while(exec->out[i] != NULL)
+		free(exec->out[i++]);
+	i = 0;
+	while(exec->in[i] != NULL)
+		free(exec->in[i++]);
+	free(exec);
+	return (g_status);
 }

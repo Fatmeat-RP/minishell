@@ -7,11 +7,12 @@ int	execuction(t_exec *cmd, t_instance *instance)
 		while(instance->builtin->iter->next
 			&& ft_strcmp(cmd->cmd[0], instance->builtin->iter->name) != 0)
 			instance->builtin->iter = instance->builtin->iter->next;
-		g_status = (*instance->builtin->iter->fun)(cmd->cmd, instance->envp);
+		g_status = (*instance->builtin->iter->fun)(cmd->cmd, instance);
 	}
 	else
 		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
-	exit (g_status);
+	free_instance(instance, 2);
+	exit (free_exe(cmd));
 }
 
 int	forklift(t_exec *cmd, t_instance *instance)

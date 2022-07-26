@@ -12,12 +12,12 @@
 
 #include <minishell.h>
 
-int	built_in_pwd(char **arg, char **envp)
+int	built_in_pwd(char **arg, t_instance *instance)
 {
 	char	*place;
 
 	(void)arg;
-	(void)envp;
+	(void)instance;
 	place = getcwd(NULL, 0);
 	if (!place)
 		return (-1);

@@ -12,17 +12,17 @@
 
 #include <minishell.h>
 
-int	built_in_env(char **arg, char **envp)
+int	built_in_env(char **arg, t_instance *instance)
 {
 	size_t	i;
 
 	(void)arg;
 	i = 0;
-	if (envp == NULL)
+	if (instance->envp == NULL)
 		return (-1);
-	while (envp[i])
+	while (instance->envp[i])
 	{
-		printf("%s\n", envp[i]);
+		printf("%s\n", instance->envp[i]);
 		i++;
 	}
 	return (0);

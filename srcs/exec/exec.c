@@ -19,9 +19,10 @@ static int	exec_one_builtin(t_exec *cmd, t_instance *instance)
 	redir_in_error(cmd);
 	redirect_out(cmd);
 	while(instance->builtin->iter->next
-		&& ft_strncmp(cmd->cmd[0], instance->builtin->iter->name, ft_strlen(instance->builtin->iter->name)) != 0)
+		&& ft_strncmp(cmd->cmd[0], instance->builtin->iter->name,
+			ft_strlen(instance->builtin->iter->name)) != 0)
 		instance->builtin->iter = instance->builtin->iter->next;
-	g_status = (*instance->builtin->iter->fun)(cmd->cmd, instance->envp);
+	g_status = (*instance->builtin->iter->fun)(cmd->cmd, instance);
 	return (g_status);
 }
 
@@ -41,7 +42,8 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance)
 		redir_in_error(cmd);
 		redirect_out(cmd);
 		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
-		exit(g_status);
+		free_instance(instance, 2);
+		exit(free_exe(cmd));
 	}
 	else
 		waitpid(pid, &g_status, 0);

@@ -1,41 +1,62 @@
 #include <minishell.h>
 
-/*
-static int	looper(char **arg)
+
+static int	error_export(char *arg)
+{
+	write(2, "minishell: ", 12);
+	write(2, "export: '", 9);
+	write(2, arg, ft_strlen(arg));
+	write(2, "': not a valid identifier\n", 27);
+	return (-1);
+}
+
+static int	is_envp(char *arg, char **envp)
 {
 	int		i;
-	char	*line;
+	char	*varname;
+	size_t	len;
 
 	i = 0;
-	while (arg[1] && arg[1][i] != '=')
+	if (arg[0] == '=')
+		return (-3);
+	varname = get_varname(arg);
+	if (varname == NULL)
+		return (-1);
+	len =  ft_strlen(varname);
+	while (envp[i] != NULL)
+	{
+		if (ft_strncmp(envp[i], varname, len) == 0)
+		{
+			free(varname);
+			return (i);
+		}
 		i++;
-	line = malloc(i);
-	i = 0;
-		while (arg[1] && arg[1][i] != '=')
-		i++;
-	return (i);
-}*/
+	}
+	free(varname);
+	return (-2);
+}
 
-int	builtin_export(char **arg, char **envp)
+int	builtin_export(char **arg, t_instance *instance)
 {
-	(void)arg;
-	(void)envp;
-/*	char	*line;
 	int		i;
-	size_t	size;
 	int		j;
 
-	i = 0;
-	j = 0;
-	while(arg[j] != NULL)
+	i = 1;
+	if (arg[i] == NULL)
+		return(built_in_env(arg, instance));
+	while(arg[i] != NULL)
 	{
-		line = looper(arg);
-		size = ft_strlen(line);
-		while (envp[i] && ft_strncmp(envp[i], line, size) != 0)
-			i++;
-		envp[i] = ft_strdup(arg[1]);
-		free(line);
-		j++;
-	}*/
+		j = is_envp(arg[i], instance->envp);
+		if (j == -2)
+			instance->envp = add_envp(instance->envp, arg[i]);
+		else if (j == -3)
+			return (error_export(arg[i]));
+		else
+		{
+			free(instance->envp[j]);
+			instance->envp[j] = ft_strdup(arg[i]);
+		}
+		i++;
+	}
 	return (0);
 }

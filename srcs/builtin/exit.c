@@ -12,11 +12,12 @@
 
 #include <minishell.h>
 
-int	exit_builtin(char **arg, char **envp)
+int	exit_builtin(char **arg, t_instance *instance)
 {
 	(void)arg;
-	(void)envp;
-	write(2, "exit\n", 5);
+	(void)instance;
+	write(2, "exit\n", 5);\
+	free_instance(instance, 0);
 	exit (0);
 	return (0);
 }

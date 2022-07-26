@@ -1,8 +1,8 @@
 #include <minishell.h>
 
-int	builtin_cd(char **arg, char **envp)
+int	builtin_cd(char **arg, t_instance *instance)
 {
-	(void)envp;
+	(void)instance;
 	if (chdir(arg[1]) == -1)
 	{
 		write(1, "minishell: ", 12);
