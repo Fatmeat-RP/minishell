@@ -16,6 +16,7 @@ t_control_parse	*split_block_2(t_control_parse *new_lst, char **tab)
 {
 	new_lst->iter = init_parse(ft_strdup(tab[0]), 0);
 	new_lst->iter->next = 0;
+	tab_cleaner(tab);
 	return (new_lst);
 }
 
@@ -48,30 +49,31 @@ t_control_parse	*split_block(char *elem, int x)
 	return (new_lst);
 }
 
-void	splitter(t_control_parse *parsing, t_control_parse *rep)
+static void	hellothenorme(t_control_parse *parsing, t_control_parse *rep, int i)
 {
 	t_control_parse	*new;
-	int				i;
+
+	new = split_block(parsing->iter->elem, (parsing->iter->next != 0));
+	if (i == 0)
+		rep->first = new->iter;
+	if (i > 0)
+		rep->iter->next = new->iter;
+	rep->iter = new->iter;
+	while (rep->iter->next)
+		rep->iter = rep->iter->next;
+	free(new);
+}
+
+void	splitter(t_control_parse *parsing, t_control_parse *rep)
+{
+	int	i;
 
 	i = 0;
 	parsing->iter = parsing->first;
 	while (parsing->iter)
 	{
 		if (parsing->iter->flag != 7)
-		{
-			if (parsing->iter->next)
-				new = split_block(parsing->iter->elem, 1);
-			else
-				new = split_block(parsing->iter->elem, 0);
-			if (i == 0)
-				rep->first = new->iter;
-			if (i > 0)
-				rep->iter->next = new->iter;
-			rep->iter = new->iter;
-			while (rep->iter->next)
-				rep->iter = rep->iter->next;
-			free(new);
-		}
+			hellothenorme(parsing, rep, i);
 		else if (parsing->iter->flag == 7)
 		{
 			parse_add_just_back(rep, init_parse(ft_strdup("|"), 7));

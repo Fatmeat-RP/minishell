@@ -14,6 +14,12 @@
 
 static int	exec_one_builtin(t_exec *cmd, t_instance *instance)
 {
+	int		save[2];
+
+	save[0] = dup(0);
+	save[1] = dup(1);
+	if (cmd->is_here_doc == true)
+		here_doc(cmd, instance);
 	redir_in_error(cmd);
 	redirect_out(cmd);
 	while(instance->builtin->iter->next
@@ -21,6 +27,10 @@ static int	exec_one_builtin(t_exec *cmd, t_instance *instance)
 			ft_strlen(instance->builtin->iter->name)) != 0)
 		instance->builtin->iter = instance->builtin->iter->next;
 	g_status = (*instance->builtin->iter->fun)(cmd->cmd, instance);
+	dup2(save[0], 0);
+	dup2(save[1], 1);
+	close(save[0]);
+	close(save[1]);
 	return (g_status);
 }
 
@@ -28,18 +38,20 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance)
 {
 	pid_t	pid;
 
-	if (cmd->is_here_doc == true)
-		here_doc(cmd);
 	pid = fork();
 	if (pid == -1)
 		return (-1);
 	if (pid == 0)
 	{
+		if (cmd->is_here_doc == true)
+			here_doc(cmd, instance);
 		signal(SIGINT, sig_int_child_handler);
 		signal(SIGQUIT, sig_quit_handler);
 		redir_in_error(cmd);
 		redirect_out(cmd);
 		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
+		free_instance(instance, 0);
+		free_exe(cmd);
 		exit(g_status);
 	}
 	else
@@ -82,6 +94,8 @@ int	chose_exec(t_control_exec *exes, t_instance *instance)
 		ret = execution_pipe(exes, instance);
 	dup2(fd[0], STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
+	close(fd[0]);
+	close(fd[1]);
 	exes->iter = exes->first;
 	return (ret);
 }

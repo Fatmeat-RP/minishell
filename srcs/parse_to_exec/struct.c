@@ -12,16 +12,16 @@ static t_control_exec	*struct2(t_control_parse *parse, t_control_exec *exec,
 	}
 	else if (parse->iter->flag == CMD_FLAG)
 	{
-        exec->iter->cmd[0] = get_path(strdup(parse->iter->elem), envp, 0);
+        exec->iter->cmd[0] = get_path(ft_strdup(parse->iter->elem), envp, 0);
 	}
 	else if (parse->iter->flag == BUILTIN_FLAG)
 	{
-		exec->iter->cmd[0] = strdup(parse->iter->elem);
+		exec->iter->cmd[0] = ft_strdup(parse->iter->elem);
 		exec->iter->is_builtin = true;
 	}
     else if (parse->iter->flag == ARGS_FLAG)
 	{
-		exec->iter->cmd[ntom->i] = strdup(parse->iter->elem);
+		exec->iter->cmd[ntom->i] = ft_strdup(parse->iter->elem);
 		ntom->i++;
 	}
 	return (exec);
@@ -33,18 +33,18 @@ static t_control_exec	*struct3(t_control_parse *parse, t_control_exec *exec,
 	if (parse->iter->flag == REDIR_IN_FLAG)
 	{
 		parse->iter = parse->iter->next;
-		exec->iter->in[ntom->in++] = strdup(parse->iter->elem);
+		exec->iter->in[ntom->in++] = ft_strdup(parse->iter->elem);
 	}
 	else if (parse->iter->flag == REDIR_OUT_FLAG)
 	{
 		parse->iter = parse->iter->next;
-		exec->iter->out[ntom->out] = strdup(parse->iter->elem);
+		exec->iter->out[ntom->out] = ft_strdup(parse->iter->elem);
 		exec->iter->is_append[ntom->out++] = '0';
 	}
 	else if (parse->iter->flag == REDIR_OUT_ADD_FLAG)
 	{
 		parse->iter = parse->iter->next;
-		exec->iter->out[ntom->out] = strdup(parse->iter->elem);
+		exec->iter->out[ntom->out] = ft_strdup(parse->iter->elem);
 		exec->iter->is_append[ntom->out++] = '1';
 	}
 	else if (parse->iter->flag == HERE_DOC_FLAG)

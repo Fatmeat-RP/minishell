@@ -18,7 +18,7 @@ t_parse	*cutter(t_parse *node, size_t i)
 	size_t	c;
 	t_parse	*new;
 
-	s = malloc(sizeof(char) * i);
+	s = malloc(sizeof(char) * i + 1);
 	if (!s)
 		return (NULL);
 	c = 0;

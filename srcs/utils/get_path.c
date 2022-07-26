@@ -35,6 +35,7 @@ char	*get_path(char *cmd, char **envp, size_t j)
 		if (access(path, F_OK) == 0)
 		{
 			cmd_free(paths);
+			free(cmd);
 			return (path);
 		}
 		free(path);

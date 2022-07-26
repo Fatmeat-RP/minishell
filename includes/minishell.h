@@ -32,8 +32,6 @@
 ------------------------------------TYPEDEF----------------------------------
 * ************************************************************************** */
 
-typedef long long	t_s128;
-
 typedef struct s_execution  t_exec;
 typedef struct s_parsing    t_parse;
 typedef struct s_btin		t_btin;
@@ -191,8 +189,7 @@ t_control_exec		*structy(t_control_parse *parse, int nb_pipe, char **envp);
 int					redirect_out(t_exec *cmd);
 void				redir_in_error(t_exec *cmd);
 int					line_counter(char **aos);
-int					here_doc(t_exec *cmd);
-int					get_next_line(char **line);
+int					here_doc(t_exec *cmd, t_instance *instance);
 
 /* ----- execution --------------------------------------------------------- */
 
@@ -298,5 +295,7 @@ size_t				cpy_value(char *s, t_var *var, size_t dellen, char *dst);
 char				*find_name(char *s, size_t dellen, size_t i, size_t j);
 t_bool				in_charset(char c);
 t_var				*dispatch_var(t_var *var);
+void				sub_it(char *final_s, t_parse *node, t_var *var, size_t	dellen);
+size_t				ft_find_value(char *varname, t_var *var);
 
 #endif

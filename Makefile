@@ -28,6 +28,8 @@ SRCS 		=	$(SRCSDIR)parse_to_exec/struct.c\
 				$(SRCSDIR)parsing/cut_redir.c\
 				$(SRCSDIR)parsing/dispatch_var.c\
 				$(SRCSDIR)parsing/dollar.c\
+				$(SRCSDIR)parsing/dollar2.c\
+				$(SRCSDIR)parsing/dollar3.c\
 				$(SRCSDIR)parsing/fill_var.c\
 				$(SRCSDIR)parsing/first_check.c\
 				$(SRCSDIR)parsing/flaggeur_file_name.c\
@@ -100,7 +102,8 @@ OBJS		=	$(SRCS:$(SRCSDIR)%.c=$(OBJSDIR)%.o)
 all			: 	${NAME}
 
 ${NAME}		:	${OBJS} ${DEPS} Makefile
-			@$(CC) $(OBJS) ${CFLAGS} $(HEADER) -o $(NAME) $(LIBS) -fsanitize=address
+			@$(CC) $(OBJS) ${CFLAGS} $(HEADER) -o $(NAME) $(LIBS)
+#-g3 -fsanitize=address
 
 $(OBJS)		:	$(OBJSDIR)%.o	:	$(SRCSDIR)%.c ${DEPS} Makefile
 			@mkdir -p $(OBJSDIR)

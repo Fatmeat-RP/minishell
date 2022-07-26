@@ -23,7 +23,7 @@ t_exec	*init_exe(void)
 	exe->is_here_doc = false;
 	exe->next = NULL;
 	exe->prev = NULL;
-	while (i <= 100)
+	while (i < 100)
 	{
 		exe->cmd[i] = NULL;
 		exe->in[i] = NULL;

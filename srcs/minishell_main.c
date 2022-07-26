@@ -63,9 +63,9 @@ static t_instance *init_minishell(char **envp, int ac, char **av)
 
 	(void)ac;
 	(void)av;
-	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sig_int_handler);
-	instance = malloc(sizeof(t_instance *));
+	signal(SIGQUIT, SIG_IGN);
+	instance = malloc(sizeof(t_instance));
 	if (!instance)
 		return (NULL);
 	instance->builtin = init_builtin();

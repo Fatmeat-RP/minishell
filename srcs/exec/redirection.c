@@ -21,14 +21,17 @@ static int redirect_in(t_exec *cmd)
 	fd = -1;
 	if (cmd->in[0] != NULL)
 	{
-		while (cmd->in[i + 1] != NULL)
+		while (cmd->in[i] != NULL)
+		{
+			if (access(cmd->in[i], F_OK | R_OK) == -1)
+				return (-1);
+			fd = open(cmd->in[i], O_RDONLY);
+			if (fd == -1)
+				return (-1);
+			dup2(fd, STDIN_FILENO);
+			close(fd);
 			i++;
-		if (access(cmd->in[i], F_OK | R_OK) == -1)
-			return (-1);
-		fd = open(cmd->in[i], O_RDONLY);
-		if (fd == -1)
-			return (-1);
-		dup2(fd, STDIN_FILENO);
+		}
 		return (i);
 	}
 	return (0);
@@ -66,30 +69,38 @@ int redirect_out(t_exec *cmd)
 			i++;
 		}
 		if (fd != -1)
+		{
 			dup2(fd, STDOUT_FILENO);
+			close(fd);
+		}
 	}
 	return (0);
 }
 
-static int utils_hdoc(t_exec *cmd, int pipefd[2])
+static int utils_hdoc(t_exec *cmd, int *pipefd)
 {
 	char	*line;
+	size_t	tmp;
 
 	signal(SIGINT, sig_int_child_handler);
 	signal(SIGQUIT, sig_quit_handler);
 	close(pipefd[0]);
-	dup2(pipefd[1], STDOUT_FILENO);
+	tmp = ft_strlen(cmd->limiter);
 	line = readline("heredoc> ");
-	write(pipefd[1], line, ft_strlen(line));
-	while (line != NULL || ft_strncmp(line, cmd->limiter, ft_strlen(cmd->limiter)) != 0)
+	while (line && ft_strncmp(line, cmd->limiter, tmp) != 0)
 	{
-		line = readline("heredoc> ");
 		write(pipefd[1], line, ft_strlen(line));
+		write(pipefd[1], "\n", 1);
+		free(line);
+		line = readline("heredoc> ");
 	}
+	free(line);
+	free_exe(cmd);
+	close(pipefd[1]);
 	exit (0);
 }
 
-int here_doc(t_exec *cmd)
+int here_doc(t_exec *cmd, t_instance *instance)
 {
 	int		pipefd[2];
 	pid_t	pid;
@@ -99,12 +110,16 @@ int here_doc(t_exec *cmd)
 	pid = fork();
 	if (pid == -1)
 		return (-1);
-	if (pid)
+	if (pid == 0)
+	{
+		free_instance(instance, 0);
 		utils_hdoc(cmd, pipefd);
+	}
 	else
 	{
 		close(pipefd[1]);
-		dup2(pipefd[0], STDIN_FILENO);
+		dup2(pipefd[0], 0);
+		close(pipefd[0]);
 		waitpid(pid, NULL, 0);
 	}
 	return (0);

@@ -23,12 +23,12 @@ void	sig_int_handler(int signum)
 
 void	sig_int_child_handler(int signum)
 {
-	kill(0, signum);
+	(void)signum;
+	exit(0);
 	rl_redisplay();
 }
 
 void	sig_quit_handler(int signum)
 {
-	kill(0, signum);
 	printf("\nQuit: %i\n", signum);
 }

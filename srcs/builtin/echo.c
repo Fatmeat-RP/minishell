@@ -36,7 +36,7 @@ int	builtin_echo(char **arg, t_instance *instance)
 		looper(arg, i);
 	else
 	{
-		looper(arg, ++i);
+		looper(arg, i);
 		write(1, "\n", 3);
 	}
 	return (0);
