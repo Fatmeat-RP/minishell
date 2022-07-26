@@ -73,8 +73,6 @@ int	free_instance(t_instance *instance, int i)
 	while (instance->builtin->first->next != NULL)
 	{
 		instance->builtin->iter = instance->builtin->first->next;
-		if (i == 3)
-			free(instance->builtin->first->name);
 		free(instance->builtin->first);
 		instance->builtin->first = instance->builtin->iter;
 	}

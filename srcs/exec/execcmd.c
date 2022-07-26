@@ -11,7 +11,7 @@ int	execuction(t_exec *cmd, t_instance *instance)
 	}
 	else
 		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
-//	free_instance(instance, 2);
+	free_instance(instance, 2);
 	exit (free_exe(cmd));
 }
 
@@ -22,11 +22,11 @@ int	forklift(t_exec *cmd, t_instance *instance)
 
 	if (pipe(pipefd) == -1)
 		return (-1);
+	if (cmd->is_here_doc == true)
+		here_doc(cmd);
 	pid = fork();
 	if (pid == -1)
 		return (-1);
-	if (cmd->is_here_doc == true)
-		here_doc(cmd);
 	if (pid == 0)
 	{
 		redir_in_error(cmd);

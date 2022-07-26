@@ -30,11 +30,11 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance)
 {
 	pid_t	pid;
 
+	if (cmd->is_here_doc == true)
+		here_doc(cmd);
 	pid = fork();
 	if (pid == -1)
 		return (-1);
-	if (cmd->is_here_doc == true)
-		here_doc(cmd);
 	if (pid == 0)
 	{
 		signal(SIGINT, sig_int_child_handler);
@@ -42,7 +42,7 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance)
 		redir_in_error(cmd);
 		redirect_out(cmd);
 		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
-//		free_instance(instance, 2);
+		free_instance(instance, 2);
 		exit(free_exe(cmd));
 	}
 	else
@@ -83,6 +83,7 @@ int	chose_exec(t_control_exec *exes, t_instance *instance)
 	else
 		ret = execution_pipe(exes, instance);
 	dup2(fd, STDIN_FILENO);
+	exes->iter = exes->first;
 	return (ret);
 }
 

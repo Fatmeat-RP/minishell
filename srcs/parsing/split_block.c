@@ -72,6 +72,11 @@ void	splitter(t_control_parse *parsing, t_control_parse *rep)
 				rep->iter = rep->iter->next;
 			free(new);
 		}
+		else if (parsing->iter->flag == 7)
+		{
+			parse_add_just_back(rep, init_parse(ft_strdup("|"), 7));
+			rep->iter = rep->iter->next;
+		}
 		parsing->iter = parsing->iter->next;
 		i++;
 	}

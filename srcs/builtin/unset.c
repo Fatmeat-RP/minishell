@@ -1,17 +1,17 @@
 #include <minishell.h>
 
-static int	loop(t_instance *instance, char *arg)
+static char	**loop(char **envp, char *arg)
 {
 	int	j;
 
 	j = 0;
-	while (instance->envp[j])
+	while (envp[j])
 	{
-		if (ft_strncmp(instance->envp[j], arg, ft_strlen(arg) == 0))
-			instance->envp = del_envp(instance->envp, j);
+		if (ft_strncmp(envp[j], arg, ft_strlen(arg)) == 0)
+			envp = del_envp(envp, j);
 		j++;
 	}
-	return (0);
+	return (envp);
 }
 
 int	builtin_unset(char **arg, t_instance *instance)
@@ -21,7 +21,7 @@ int	builtin_unset(char **arg, t_instance *instance)
 	i = 1;
 	while (arg[i] != NULL)
 	{
-		loop(instance, arg[i]);
+		instance->envp = loop(instance->envp, arg[i]);
 		i++;
 	}
 	return (0);

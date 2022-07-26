@@ -69,6 +69,7 @@ char	**del_envp(char **envp, int index)
 
 	i = 0;
 	k = 0;
+	printf("%i\n", index);
 	new_envp = malloc(sizeof(char *) * ft_size(envp));
 	if (new_envp == NULL)
 		return (envp);
@@ -83,6 +84,6 @@ char	**del_envp(char **envp, int index)
 		i++;
 	}
 	free(envp);
-	new_envp[i] = NULL;
+	new_envp[k] = NULL;
 	return (new_envp);
 }

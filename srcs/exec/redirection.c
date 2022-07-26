@@ -103,7 +103,7 @@ int here_doc(t_exec *cmd)
 	{
 		close(pipefd[1]);
 		dup2(pipefd[0], STDIN_FILENO);
-		waitpid(pid, &g_status, 0);
+		waitpid(pid, NULL, 0);
 	}
 	return (0);
 }
