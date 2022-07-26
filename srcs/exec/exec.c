@@ -14,8 +14,6 @@
 
 static int	exec_one_builtin(t_exec *cmd, t_instance *instance)
 {
-	if (cmd->is_here_doc == true)
-		here_doc(cmd);
 	redir_in_error(cmd);
 	redirect_out(cmd);
 	while(instance->builtin->iter->next
@@ -42,8 +40,7 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance)
 		redir_in_error(cmd);
 		redirect_out(cmd);
 		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
-		free_instance(instance, 2);
-		exit(free_exe(cmd));
+		exit(g_status);
 	}
 	else
 		waitpid(pid, &g_status, 0);
@@ -72,9 +69,10 @@ static int	execution_pipe(t_control_exec *exes, t_instance *instance)
 int	chose_exec(t_control_exec *exes, t_instance *instance)
 {
 	int ret;
-	int	fd;
+	int	fd[2];
 
-	fd = dup(STDIN_FILENO);
+	fd[0] = dup(STDIN_FILENO);
+	fd[1] = dup(STDOUT_FILENO);
 	ret = 0;
 	if (!exes->first)
 		return (-1);
@@ -82,7 +80,8 @@ int	chose_exec(t_control_exec *exes, t_instance *instance)
 		ret = execution_solo(exes->first, instance);
 	else
 		ret = execution_pipe(exes, instance);
-	dup2(fd, STDIN_FILENO);
+	dup2(fd[0], STDIN_FILENO);
+	dup2(fd[1], STDOUT_FILENO);
 	exes->iter = exes->first;
 	return (ret);
 }

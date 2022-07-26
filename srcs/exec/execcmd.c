@@ -2,6 +2,8 @@
 
 int	execuction(t_exec *cmd, t_instance *instance)
 {
+	signal(SIGINT, sig_int_child_handler);
+	signal(SIGQUIT, sig_quit_handler);
 	if (cmd->is_builtin == true)
 	{
 		while(instance->builtin->iter->next
@@ -11,8 +13,7 @@ int	execuction(t_exec *cmd, t_instance *instance)
 	}
 	else
 		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
-	free_instance(instance, 2);
-	exit (free_exe(cmd));
+	exit (g_status);
 }
 
 int	forklift(t_exec *cmd, t_instance *instance)
@@ -22,8 +23,6 @@ int	forklift(t_exec *cmd, t_instance *instance)
 
 	if (pipe(pipefd) == -1)
 		return (-1);
-	if (cmd->is_here_doc == true)
-		here_doc(cmd);
 	pid = fork();
 	if (pid == -1)
 		return (-1);

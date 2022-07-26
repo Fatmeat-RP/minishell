@@ -75,6 +75,8 @@ static int utils_hdoc(t_exec *cmd, int pipefd[2])
 {
 	char	*line;
 
+	signal(SIGINT, sig_int_child_handler);
+	signal(SIGQUIT, sig_quit_handler);
 	close(pipefd[0]);
 	dup2(pipefd[1], STDOUT_FILENO);
 	line = readline("heredoc> ");
@@ -84,7 +86,7 @@ static int utils_hdoc(t_exec *cmd, int pipefd[2])
 		line = readline("heredoc> ");
 		write(pipefd[1], line, ft_strlen(line));
 	}
-	exit (free_exe(cmd));
+	exit (0);
 }
 
 int here_doc(t_exec *cmd)

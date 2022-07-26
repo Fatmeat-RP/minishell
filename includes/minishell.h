@@ -192,6 +192,7 @@ int					redirect_out(t_exec *cmd);
 void				redir_in_error(t_exec *cmd);
 int					line_counter(char **aos);
 int					here_doc(t_exec *cmd);
+int					get_next_line(char **line);
 
 /* ----- execution --------------------------------------------------------- */
 
@@ -223,6 +224,7 @@ size_t				ft_strlen(char *s);
 char				**ft_split_it(char *line, char c, size_t i, int q);
 int					pipe_counter(t_control_parse *parse);
 int					free_exe(t_exec *exec);
+int					ft_atoi(char *s);
 
 /* ----- list -------------------------------------------------------------- */
 
@@ -258,6 +260,7 @@ char				**init_envp(char **envp);
 char				**add_envp(char **envp, char *new);
 char				*get_varname(char *new);
 char				**del_envp(char **envp, int index);
+void				addshlv(t_instance *instance);
 
 /* ----- parsing ----------------------------------------------------------- */
 

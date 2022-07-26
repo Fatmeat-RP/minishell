@@ -69,6 +69,7 @@ SRCS 		=	$(SRCSDIR)parse_to_exec/struct.c\
 				$(SRCSDIR)utils/utils.c\
 				$(SRCSDIR)utils/free_memory.c\
 				$(SRCSDIR)utils/get_path.c\
+				$(SRCSDIR)utils/ft_atoi.c\
 				$(SRCSDIR)minishell_main.c\
 				$(SRCSDIR)builtin/cd.c\
 				$(SRCSDIR)builtin/echo.c\
@@ -99,9 +100,7 @@ OBJS		=	$(SRCS:$(SRCSDIR)%.c=$(OBJSDIR)%.o)
 all			: 	${NAME}
 
 ${NAME}		:	${OBJS} ${DEPS} Makefile
-			@$(CC) $(OBJS) ${CFLAGS} $(HEADER) -o $(NAME) $(LIBS)
-
-# -fsanitize=address
+			@$(CC) $(OBJS) ${CFLAGS} $(HEADER) -o $(NAME) $(LIBS) -fsanitize=address
 
 $(OBJS)		:	$(OBJSDIR)%.o	:	$(SRCSDIR)%.c ${DEPS} Makefile
 			@mkdir -p $(OBJSDIR)

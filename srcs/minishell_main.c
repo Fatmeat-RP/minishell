@@ -60,8 +60,6 @@ static t_builtin	*init_builtin(void)
 static t_instance *init_minishell(char **envp, int ac, char **av)
 {
 	t_instance	*instance;
-	char		*pwd;
-	char		*tmp;
 
 	(void)ac;
 	(void)av;
@@ -72,11 +70,7 @@ static t_instance *init_minishell(char **envp, int ac, char **av)
 		return (NULL);
 	instance->builtin = init_builtin();
 	instance->envp = init_envp(envp);
-	tmp = getcwd(NULL, 0);
-	pwd = ft_strjoin("PWD=", tmp);
-	free(tmp);
-	instance->envp = add_envp(instance->envp, pwd);
-	free(pwd);
+	addshlv(instance);
 	return (instance);
 }
 
@@ -119,6 +113,7 @@ int main(int ac, char **av, char **envp)
 		else if (instance->line[0] != 0)
 			if_line(instance);
 	}
+	write(1, "\n", 1);
 	rl_clear_history();
 	return (free_instance(instance, 0));
 }

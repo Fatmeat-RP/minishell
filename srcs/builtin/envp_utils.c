@@ -87,3 +87,31 @@ char	**del_envp(char **envp, int index)
 	new_envp[k] = NULL;
 	return (new_envp);
 }
+
+void	addshlv(t_instance *instance)
+{
+	int		i;
+	char	**tmp;
+
+	i = 0;
+	tmp = malloc(sizeof(char *) * 3);
+	while (i < 3)
+		tmp[i++] = NULL;
+	i = 0;
+	while (instance->envp[i] && ft_strnstr(instance->envp[i], "SHLVL=", 6) == 0)
+		i++;
+	if (instance->envp[i] == NULL)
+		tmp[0] = ft_strdup("SHLVL=1");
+	else
+	{
+		i = ft_atoi(instance->envp[i] + 6);
+		tmp[0] = ft_itoa(++i);
+		tmp[1] = ft_strjoin("SHLVL=", tmp[0]);
+	}
+	builtin_export(tmp, instance);
+	i = 0;
+	while (tmp[i] != NULL)
+		free(tmp[i++]);
+	free(tmp);
+	return ;
+}
