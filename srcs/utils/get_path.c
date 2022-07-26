@@ -78,7 +78,7 @@ char	*get_path(char *cmd, char **envp, size_t j)
 	{
 		part_path = ft_strjoin(paths[j], "/");
 		path = ft_strfreejoin(part_path, cmd);
-		if (access(path, F_OK | X_OK) == 0)
+		if (access(path, F_OK) == 0)
 		{
 			cmd_free(paths);
 			return (path);
