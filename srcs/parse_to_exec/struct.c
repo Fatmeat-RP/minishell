@@ -16,7 +16,7 @@ static t_control_exec	*struct2(t_control_parse *parse, t_control_exec *exec,
 	}
 	else if (parse->iter->flag == BUILTIN_FLAG)
 	{
-		exec->iter->cmd[0] = get_path(strdup(parse->iter->elem), envp, 0);
+		exec->iter->cmd[0] = strdup(parse->iter->elem);
 		exec->iter->is_builtin = true;
 	}
     else if (parse->iter->flag == ARGS_FLAG)
@@ -73,6 +73,7 @@ t_control_exec	*structy(t_control_parse *parse, int nb_pipe, char **envp)
 			&ntom);
 		parse->iter = parse->iter->next;
 	}
+	parse->iter = parse->first;
 	exec->iter = exec->first;
 	return (exec);
 }

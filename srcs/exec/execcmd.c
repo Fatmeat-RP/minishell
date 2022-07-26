@@ -11,7 +11,7 @@ int	execuction(t_exec *cmd, t_instance *instance)
 	}
 	else
 		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
-	free_instance(instance, 2);
+//	free_instance(instance, 2);
 	exit (free_exe(cmd));
 }
 

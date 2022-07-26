@@ -42,7 +42,7 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance)
 		redir_in_error(cmd);
 		redirect_out(cmd);
 		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
-		free_instance(instance, 2);
+//		free_instance(instance, 2);
 		exit(free_exe(cmd));
 	}
 	else

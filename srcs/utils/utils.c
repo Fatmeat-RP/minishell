@@ -53,13 +53,23 @@ int	line_counter(char **aos)
 	return (i);
 }
 
+static char	*cmd_bad_access(char *cmd)
+{
+	if (access(cmd, F_OK | X_OK) == -1)
+	{
+		write(2, cmd, ft_strlen(cmd));
+		write(2, ": command not found", 20);
+	}
+	return (cmd);
+}
+
 char	*get_path(char *cmd, char **envp, size_t j)
 {
 	char	**paths;
 	char	*path;
 	char	*part_path;
 
-	while (envp[0] && ft_strnstr(envp[j], "PATH", 4) == 0)
+	while (envp[j] && ft_strncmp(envp[j], "PATH=", 6) == 0)
 		j++;
 	if (envp[j] == NULL)
 		return (cmd);
@@ -69,7 +79,7 @@ char	*get_path(char *cmd, char **envp, size_t j)
 	{
 		part_path = ft_strjoin(paths[j], "/");
 		path = ft_strfreejoin(part_path, cmd);
-		if (access(path, F_OK) == 0)
+		if (access(path, F_OK | X_OK) == 0)
 		{
 			cmd_free(paths);
 			return (path);
@@ -77,20 +87,5 @@ char	*get_path(char *cmd, char **envp, size_t j)
 		free(path);
 	}
 	cmd_free(paths);
-	return (cmd);
-}
-
-void	cmd_free(char **cmd)
-{
-	size_t	i;
-
-	i = 0;
-	if (!cmd)
-		return ;
-	while (cmd[i])
-	{
-		free(cmd[i]);
-		i++;
-	}
-	free(cmd);
+	return (cmd_bad_access(cmd));
 }

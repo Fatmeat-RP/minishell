@@ -60,6 +60,8 @@ static t_builtin	*init_builtin(void)
 static t_instance *init_minishell(char **envp, int ac, char **av)
 {
 	t_instance	*instance;
+	char		*pwd;
+	char		*tmp;
 
 	(void)ac;
 	(void)av;
@@ -70,6 +72,11 @@ static t_instance *init_minishell(char **envp, int ac, char **av)
 		return (NULL);
 	instance->builtin = init_builtin();
 	instance->envp = init_envp(envp);
+	tmp = getcwd(NULL, 0);
+	pwd = ft_strjoin("PWD=", tmp);
+	free(tmp);
+	instance->envp = add_envp(instance->envp, pwd);
+	free(pwd);
 	return (instance);
 }
 

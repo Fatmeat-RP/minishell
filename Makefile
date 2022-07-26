@@ -67,6 +67,7 @@ SRCS 		=	$(SRCSDIR)parse_to_exec/struct.c\
 				$(SRCSDIR)utils/signal.c\
 				$(SRCSDIR)utils/utils2.c\
 				$(SRCSDIR)utils/utils.c\
+				$(SRCSDIR)utils/free_memory.c\
 				$(SRCSDIR)minishell_main.c\
 				$(SRCSDIR)builtin/cd.c\
 				$(SRCSDIR)builtin/echo.c\
