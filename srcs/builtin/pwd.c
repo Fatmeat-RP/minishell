@@ -21,7 +21,7 @@ int	built_in_pwd(char **arg, t_instance *instance)
 	place = getcwd(NULL, 0);
 	if (!place)
 		return (-1);
-	printf("%s\n", place);
+	write("%s\n", place);
 	free(place);
 	return (0);
 }
