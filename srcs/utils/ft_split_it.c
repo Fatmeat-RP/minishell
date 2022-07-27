@@ -86,6 +86,8 @@ char	**ft_split_it(char *s, char c, size_t i, int q)
 			if (end > beg && !ft_strsuperdup (split, i++, s + beg, end - beg))
 				return (NULL);
 			beg = end + 1;
+			if (s[beg] == ' ')
+				beg++;
 		}
 		end++;
 	}

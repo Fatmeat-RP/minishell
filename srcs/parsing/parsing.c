@@ -25,6 +25,9 @@ t_control_parse	*parsing(char *line, char **envp)
 	if (first_check(line))
 	{
 		line_tab = ft_split_it(line, '|', i, q);
+		int j = 0;
+		while(line_tab[j] != NULL)
+			printf("%s\n", line_tab[j++]);
 		parsing = set_pars(parsing, line_tab, envp);
 		if (!printer_error(parsing))
 		{
