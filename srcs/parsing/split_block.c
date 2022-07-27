@@ -66,19 +66,22 @@ static void	hellothenorme(t_control_parse *parsing, t_control_parse *rep, int i)
 
 void	splitter(t_control_parse *parsing, t_control_parse *rep)
 {
-	int	i;
+	int		i;
+	t_parse	*tmp;
 
 	i = 0;
 	parsing->iter = parsing->first;
+	tmp = parsing->iter;
 	while (parsing->iter)
 	{
 		if (parsing->iter->flag != 7)
 			hellothenorme(parsing, rep, i);
-		else if (parsing->iter->flag == 7)
+		else if (parsing->iter->flag == 7 && tmp->flag == ARGS_FLAG)
 		{
 			parse_add_just_back(rep, init_parse(ft_strdup("|"), 7));
 			rep->iter = rep->iter->next;
 		}
+		tmp = parsing->iter;
 		parsing->iter = parsing->iter->next;
 		i++;
 	}
