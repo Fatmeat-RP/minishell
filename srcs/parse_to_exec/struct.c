@@ -3,7 +3,7 @@
 static t_control_exec	*struct2(t_control_parse *parse, t_control_exec *exec,
 	t_fthenorm *ntom, char **envp)
 {
-	if (parse->iter->flag == PIPE_FLAG)
+	if (parse->iter->flag == PIPE_FLAG && parse->iter->next->flag != PIPE_FLAG)
 	{
 		exec->iter = exec->iter->next;
 		ntom->in = 0;

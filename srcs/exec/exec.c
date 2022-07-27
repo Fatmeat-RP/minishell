@@ -69,22 +69,27 @@ static int	execution_solo(t_exec *cmd, t_instance *instance)
 
 static int	execution_pipe(t_control_exec *exes, t_instance *instance)
 {
+	int	fd[2];
+
+	fd[0] = dup(STDIN_FILENO);
+	fd[1] = dup(STDIN_FILENO);
 	while (exes->iter->next != NULL)
 	{
 		forklift(exes->iter, instance);
 		exes->iter = exes->iter->next;
 	}
 	exec_one_cmd(exes->iter, instance);
+	dup2(fd[0], STDIN_FILENO);
+	dup2(fd[1], STDIN_FILENO);
 	return (0);
 }
 
 int	chose_exec(t_control_exec *exes, t_instance *instance)
 {
 	int ret;
-	int	fd[2];
+	int	fd;
 
-	fd[0] = dup(STDIN_FILENO);
-	fd[1] = dup(STDOUT_FILENO);
+	fd = dup(STDIN_FILENO);
 	ret = 0;
 	if (!exes->first)
 		return (-1);
@@ -92,10 +97,8 @@ int	chose_exec(t_control_exec *exes, t_instance *instance)
 		ret = execution_solo(exes->first, instance);
 	else
 		ret = execution_pipe(exes, instance);
-	dup2(fd[0], STDIN_FILENO);
-	dup2(fd[1], STDOUT_FILENO);
-	close(fd[0]);
-	close(fd[1]);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 	exes->iter = exes->first;
 	return (ret);
 }

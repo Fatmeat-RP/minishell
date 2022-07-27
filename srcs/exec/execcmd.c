@@ -38,14 +38,14 @@ int	forklift(t_exec *cmd, t_instance *instance)
 		redir_in_error(cmd);
 		close(pipefd[0]);
 		dup2(pipefd[1], STDOUT_FILENO);
-		close(pipefd[1]);
+//		close(pipefd[1]);
 		redirect_out(cmd);
 		execuction(cmd, instance);
 	}
 	g_status = pid;
 	close(pipefd[1]);
 	dup2(pipefd[0], STDIN_FILENO);
-	close(pipefd[0]);
+//	close(pipefd[0]);
 	waitpid(pid, &g_status, 0);
 	return (pid);
 }
