@@ -50,6 +50,8 @@ void	redir_in_error(t_exec *cmd)
 	}
 }
 
+#include <sys/errno.h>
+
 int redirect_out(t_exec *cmd)
 {
 	int	i;
@@ -63,9 +65,11 @@ int redirect_out(t_exec *cmd)
 		{
 			close(fd);
 			if (cmd->is_append[i] == '0')
-				fd = open(cmd->out[i], O_CREAT | O_WRONLY | O_TRUNC);
+				fd = open(cmd->out[i], O_CREAT | O_TRUNC | O_WRONLY, 0644);
 			else
-				fd = open(cmd->out[i], O_CREAT | O_APPEND | O_WRONLY);
+				fd = open(cmd->out[i], O_CREAT | O_APPEND | O_WRONLY, 0644);
+			if (fd < 0)
+				dprintf(2, "debug%s\n ", strerror(errno));
 			i++;
 		}
 		if (fd != -1)
@@ -119,8 +123,8 @@ int here_doc(t_exec *cmd, t_instance *instance)
 	{
 		close(pipefd[1]);
 		dup2(pipefd[0], 0);
-		close(pipefd[0]);
 		waitpid(pid, NULL, 0);
+		close(pipefd[0]);
 	}
 	return (0);
 }

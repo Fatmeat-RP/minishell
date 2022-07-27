@@ -1,0 +1,475 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/emilia/workspace/minishell'
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parse_to_exec/struct.c -o objs/parse_to_exec/struct.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/check_consec_pipe.c -o objs/parsing/check_consec_pipe.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/check_empty_line.c -o objs/parsing/check_empty_line.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/check_first_pipe.c -o objs/parsing/check_first_pipe.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/check_last_chev.c -o objs/parsing/check_last_chev.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/check_last_pipe.c -o objs/parsing/check_last_pipe.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/check_multi_chev.c -o objs/parsing/check_multi_chev.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/check_multi_node_chev.c -o objs/parsing/check_multi_node_chev.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/check_no_file_name.c -o objs/parsing/check_no_file_name.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/check_quote.c -o objs/parsing/check_quote.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/cleaner.c -o objs/parsing/cleaner.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/cut_redir.c -o objs/parsing/cut_redir.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/dispatch_var.c -o objs/parsing/dispatch_var.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/dollar.c -o objs/parsing/dollar.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/dollar2.c -o objs/parsing/dollar2.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/dollar3.c -o objs/parsing/dollar3.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/fill_var.c -o objs/parsing/fill_var.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/first_check.c -o objs/parsing/first_check.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/flaggeur_file_name.c -o objs/parsing/flaggeur_file_name.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/flaggeur_redir.c -o objs/parsing/flaggeur_redir.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/ident_cmd.c -o objs/parsing/ident_cmd.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/parse.c -o objs/parsing/parse.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/parsing.c -o objs/parsing/parsing.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/parsing_printer.c -o objs/parsing/parsing_printer.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/printer_error.c -o objs/parsing/printer_error.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/quote_supp.c -o objs/parsing/quote_supp.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/re_flaggeur.c -o objs/parsing/re_flaggeur.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/set_pars.c -o objs/parsing/set_pars.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/set_var.c -o objs/parsing/set_var.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/split_block.c -o objs/parsing/split_block.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/supp_empty_node.c -o objs/parsing/supp_empty_node.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/tote.c -o objs/parsing/tote.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/parsing/universal_flaggeur.c -o objs/parsing/universal_flaggeur.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/exec/exec.c -o objs/exec/exec.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/exec/execcmd.c -o objs/exec/execcmd.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/exec/redirection.c -o objs/exec/redirection.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/add_back.c -o objs/utils/add_back.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/exec_add_back.c -o objs/utils/exec_add_back.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/exec_last.c -o objs/utils/exec_last.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+ 
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/exec_split.c -o objs/utils/exec_split.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/ft_itoa.c -o objs/utils/ft_itoa.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/ft_split_it.c -o objs/utils/ft_split_it.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/ft_strcmp.c -o objs/utils/ft_strcmp.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/ft_strcpy.c -o objs/utils/ft_strcpy.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/ft_strdup.c -o objs/utils/ft_strdup.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/ft_strjoin.c -o objs/utils/ft_strjoin.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/ft_strlen.c -o objs/utils/ft_strlen.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/ft_utils.c -o objs/utils/ft_utils.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/init.c -o objs/utils/init.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/init_exec.c -o objs/utils/init_exec.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/lst_last.c -o objs/utils/lst_last.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/lst_size.c -o objs/utils/lst_size.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/signal.c -o objs/utils/signal.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/utils2.c -o objs/utils/utils2.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/utils.c -o objs/utils/utils.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/free_memory.c -o objs/utils/free_memory.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/get_path.c -o objs/utils/get_path.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/utils/ft_atoi.c -o objs/utils/ft_atoi.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/minishell_main.c -o objs/minishell_main.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/builtin/cd.c -o objs/builtin/cd.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/builtin/echo.c -o objs/builtin/echo.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/builtin/env.c -o objs/builtin/env.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/builtin/envp_utils.c -o objs/builtin/envp_utils.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/builtin/exit.c -o objs/builtin/exit.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/builtin/export.c -o objs/builtin/export.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/builtin/pwd.c -o objs/builtin/pwd.o
+mkdir -p ./objs/
+mkdir -p ./objs/builtin
+mkdir -p ./objs/exec
+mkdir -p ./objs/parse_to_exec
+mkdir -p ./objs/parsing
+mkdir -p ./objs/utils
+gcc -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -c srcs/builtin/unset.c -o objs/builtin/unset.o
+gcc ./objs/parse_to_exec/struct.o ./objs/parsing/check_consec_pipe.o ./objs/parsing/check_empty_line.o ./objs/parsing/check_first_pipe.o ./objs/parsing/check_last_chev.o ./objs/parsing/check_last_pipe.o ./objs/parsing/check_multi_chev.o ./objs/parsing/check_multi_node_chev.o ./objs/parsing/check_no_file_name.o ./objs/parsing/check_quote.o ./objs/parsing/cleaner.o ./objs/parsing/cut_redir.o ./objs/parsing/dispatch_var.o ./objs/parsing/dollar.o ./objs/parsing/dollar2.o ./objs/parsing/dollar3.o ./objs/parsing/fill_var.o ./objs/parsing/first_check.o ./objs/parsing/flaggeur_file_name.o ./objs/parsing/flaggeur_redir.o ./objs/parsing/ident_cmd.o ./objs/parsing/parse.o ./objs/parsing/parsing.o ./objs/parsing/parsing_printer.o ./objs/parsing/printer_error.o ./objs/parsing/quote_supp.o ./objs/parsing/re_flaggeur.o ./objs/parsing/set_pars.o ./objs/parsing/set_var.o ./objs/parsing/split_block.o ./objs/parsing/supp_empty_node.o ./objs/parsing/tote.o ./objs/parsing/universal_flaggeur.o ./objs/exec/exec.o ./objs/exec/execcmd.o ./objs/exec/redirection.o ./objs/utils/add_back.o ./objs/utils/exec_add_back.o ./objs/utils/exec_last.o ./objs/utils/exec_split.o ./objs/utils/ft_itoa.o ./objs/utils/ft_split_it.o ./objs/utils/ft_strcmp.o ./objs/utils/ft_strcpy.o ./objs/utils/ft_strdup.o ./objs/utils/ft_strjoin.o ./objs/utils/ft_strlen.o ./objs/utils/ft_utils.o ./objs/utils/init.o ./objs/utils/init_exec.o ./objs/utils/lst_last.o ./objs/utils/lst_size.o ./objs/utils/signal.o ./objs/utils/utils2.o ./objs/utils/utils.o ./objs/utils/free_memory.o ./objs/utils/get_path.o ./objs/utils/ft_atoi.o ./objs/minishell_main.o ./objs/builtin/cd.o ./objs/builtin/echo.o ./objs/builtin/env.o ./objs/builtin/envp_utils.o ./objs/builtin/exit.o ./objs/builtin/export.o ./objs/builtin/pwd.o ./objs/builtin/unset.o -Wall -Wextra -Werror -I includes -I ~/.brew/opt/readline/include -o minishell -L ~/.brew/opt/readline/lib -lreadline -g3 -fsanitize=address
+make: Leaving directory '/home/emilia/workspace/minishell'
+ 

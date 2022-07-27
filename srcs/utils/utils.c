@@ -31,7 +31,8 @@ int	pipe_counter(t_control_parse *parse)
 	i = 0;
 	while (parse->iter)
 	{
-		if (parse->iter->flag == PIPE_FLAG)
+		if (parse->iter->flag == PIPE_FLAG
+			&& parse->iter->next->flag != PIPE_FLAG)
 			i++;
 		parse->iter = parse->iter->next;
 	}

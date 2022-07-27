@@ -3,7 +3,7 @@
 static t_control_exec	*struct2(t_control_parse *parse, t_control_exec *exec,
 	t_fthenorm *ntom, char **envp)
 {
-	if (parse->iter->flag == PIPE_FLAG && parse->iter->next->flag != PIPE_FLAG)
+	if (parse->iter->flag == PIPE_FLAG)
 	{
 		exec->iter = exec->iter->next;
 		ntom->in = 0;
@@ -71,6 +71,9 @@ t_control_exec	*structy(t_control_parse *parse, int nb_pipe, char **envp)
 	{
 		exec = struct3(parse, struct2(parse, exec, &ntom, envp),
 			&ntom);
+		if (parse->iter->flag == PIPE_FLAG &&
+			parse->iter->next->flag == PIPE_FLAG)
+			parse->iter = parse->iter->next;
 		parse->iter = parse->iter->next;
 	}
 	parse->iter = parse->first;

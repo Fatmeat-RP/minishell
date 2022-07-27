@@ -34,7 +34,7 @@ static int	exec_one_builtin(t_exec *cmd, t_instance *instance)
 	return (g_status);
 }
 
-static int	exec_one_cmd(t_exec *cmd, t_instance *instance)
+static int	exec_one_cmd(t_exec *cmd, t_instance *instance, int fd)
 {
 	pid_t	pid;
 
@@ -43,19 +43,24 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance)
 		return (-1);
 	if (pid == 0)
 	{
-		if (cmd->is_here_doc == true)
-			here_doc(cmd, instance);
 		signal(SIGINT, sig_int_child_handler);
 		signal(SIGQUIT, sig_quit_handler);
+		if (fd && cmd->is_here_doc == false)
+		{
+			dup2(fd, STDIN_FILENO);
+			close(fd);
+		}
+		if (cmd->is_here_doc == true)
+			here_doc(cmd, instance);
 		redir_in_error(cmd);
 		redirect_out(cmd);
 		pid = execve(cmd->cmd[0], cmd->cmd, instance->envp);
-		free_instance(instance, 0);
 		free_exe(cmd);
-		exit(pid);
+		exit(free_instance(instance, pid));
 	}
 	g_status = pid;
 	waitpid(pid, &g_status, 0);
+	close(fd);
 	return (g_status);
 }
 
@@ -64,32 +69,28 @@ static int	execution_solo(t_exec *cmd, t_instance *instance)
 	if (cmd->is_builtin == true)
 		return (exec_one_builtin(cmd, instance));
 	else
-		return (exec_one_cmd(cmd, instance));
+		return (exec_one_cmd(cmd, instance, -1));
 }
 
 static int	execution_pipe(t_control_exec *exes, t_instance *instance)
 {
-	int	fd[2];
+	int	fd;
 
-	fd[0] = dup(STDIN_FILENO);
-	fd[1] = dup(STDIN_FILENO);
+	fd = dup(STDIN_FILENO);
 	while (exes->iter->next != NULL)
 	{
-		forklift(exes->iter, instance);
+		fd = forklift(exes->iter, instance, fd);
 		exes->iter = exes->iter->next;
 	}
-	exec_one_cmd(exes->iter, instance);
-	dup2(fd[0], STDIN_FILENO);
-	dup2(fd[1], STDIN_FILENO);
+	exec_one_cmd(exes->iter, instance, fd);
+	close(fd);
 	return (0);
 }
 
 int	chose_exec(t_control_exec *exes, t_instance *instance)
 {
 	int ret;
-	int	fd;
 
-	fd = dup(STDIN_FILENO);
 	ret = 0;
 	if (!exes->first)
 		return (-1);
@@ -97,8 +98,6 @@ int	chose_exec(t_control_exec *exes, t_instance *instance)
 		ret = execution_solo(exes->first, instance);
 	else
 		ret = execution_pipe(exes, instance);
-	dup2(fd, STDIN_FILENO);
-	close(fd);
 	exes->iter = exes->first;
 	return (ret);
 }

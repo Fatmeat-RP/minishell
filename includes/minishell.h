@@ -197,7 +197,7 @@ int					execuction(t_exec *cmd, t_instance *instance);
 int                 allocator_counter(t_control_parse *parse_list,
 						t_exec *node, short in, short out);
 char	            **exec_split(char const *s, char c);
-int					forklift(t_exec *cmd, t_instance *instance);
+int					forklift(t_exec *cmd, t_instance *instance, int fd);
 int					chose_exec(t_control_exec *exes, t_instance *instance);
 
 /* ----- utils ------------------------------------------------------------- */

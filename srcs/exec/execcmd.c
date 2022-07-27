@@ -23,7 +23,7 @@ int	execuction(t_exec *cmd, t_instance *instance)
 	exit (ret);
 }
 
-int	forklift(t_exec *cmd, t_instance *instance)
+int	forklift(t_exec *cmd, t_instance *instance, int fd)
 {
 	int	pid;
 	int	pipefd[2];
@@ -36,16 +36,15 @@ int	forklift(t_exec *cmd, t_instance *instance)
 	if (pid == 0)
 	{
 		redir_in_error(cmd);
-		close(pipefd[0]);
+		dup2(fd, STDIN_FILENO);
 		dup2(pipefd[1], STDOUT_FILENO);
-//		close(pipefd[1]);
+		close(fd);
+		close(pipefd[1]);
 		redirect_out(cmd);
 		execuction(cmd, instance);
 	}
 	g_status = pid;
 	close(pipefd[1]);
-	dup2(pipefd[0], STDIN_FILENO);
-//	close(pipefd[0]);
 	waitpid(pid, &g_status, 0);
-	return (pid);
+	return (pipefd[0]);
 }
