@@ -49,13 +49,13 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance)
 		signal(SIGQUIT, sig_quit_handler);
 		redir_in_error(cmd);
 		redirect_out(cmd);
-		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
+		pid = execve(cmd->cmd[0], cmd->cmd, instance->envp);
 		free_instance(instance, 0);
 		free_exe(cmd);
-		exit(g_status);
+		exit(pid);
 	}
-	else
-		waitpid(pid, &g_status, 0);
+	g_status = pid;
+	waitpid(pid, &g_status, 0);
 	return (g_status);
 }
 

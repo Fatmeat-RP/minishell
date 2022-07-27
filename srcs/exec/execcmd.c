@@ -2,6 +2,9 @@
 
 int	execuction(t_exec *cmd, t_instance *instance)
 {
+	int	ret;
+
+	ret = 0;
 	if (cmd->is_here_doc == true)
 		here_doc(cmd, instance);
 	signal(SIGINT, sig_int_child_handler);
@@ -11,13 +14,13 @@ int	execuction(t_exec *cmd, t_instance *instance)
 		while (instance->builtin->iter->next
 			&& ft_strcmp(cmd->cmd[0], instance->builtin->iter->name) != 0)
 			instance->builtin->iter = instance->builtin->iter->next;
-		g_status = (*instance->builtin->iter->fun)(cmd->cmd, instance);
+		ret = (*instance->builtin->iter->fun)(cmd->cmd, instance);
 	}
 	else
-		g_status = execve(cmd->cmd[0], cmd->cmd, instance->envp);
+		ret = execve(cmd->cmd[0], cmd->cmd, instance->envp);
 	free_instance(instance, 0);
 	free_exe(cmd);
-	exit (g_status);
+	exit (ret);
 }
 
 int	forklift(t_exec *cmd, t_instance *instance)
@@ -39,12 +42,10 @@ int	forklift(t_exec *cmd, t_instance *instance)
 		redirect_out(cmd);
 		execuction(cmd, instance);
 	}
-	else
-	{
-		close(pipefd[1]);
-		dup2(pipefd[0], STDIN_FILENO);
-		close(pipefd[0]);
-		waitpid(pid, &g_status, 0);
-	}
+	g_status = pid;
+	close(pipefd[1]);
+	dup2(pipefd[0], STDIN_FILENO);
+	close(pipefd[0]);
+	waitpid(pid, &g_status, 0);
 	return (pid);
 }

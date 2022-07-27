@@ -21,7 +21,8 @@ int	built_in_pwd(char **arg, t_instance *instance)
 	place = getcwd(NULL, 0);
 	if (!place)
 		return (-1);
-	write("%s\n", place);
+	write(1, place, ft_strlen(place));
+	write(1, "\n", 1);
 	free(place);
 	return (0);
 }

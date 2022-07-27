@@ -18,7 +18,8 @@ void	sig_int_handler(int signum)
 	write(2, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	rl_redisplay();
+	if (g_status <= 255)
+		rl_redisplay();
 }
 
 void	sig_int_child_handler(int signum)
