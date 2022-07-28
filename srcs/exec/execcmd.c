@@ -35,6 +35,13 @@ int	execuction(t_exec *cmd, t_instance *instance)
 	exit (ret);
 }
 
+int	choose_your_path(t_exec *cmd, t_instance *instance, int fd)
+{
+	if (fd != -1)
+		return (execuction(cmd, instance));
+	return (execve(cmd->cmd[0], cmd->cmd, instance->envp));
+}
+
 int	forklift(t_exec *cmd, t_instance *instance, int fd)
 {
 	int	pid;
@@ -50,12 +57,13 @@ int	forklift(t_exec *cmd, t_instance *instance, int fd)
 		redir_in_error(cmd);
 		dup2(fd, STDIN_FILENO);
 		dup2(pipefd[1], STDOUT_FILENO);
-		close(fd);
 		close(pipefd[1]);
+		close(fd);
 		redirect_out(cmd);
 		execuction(cmd, instance);
 	}
 	g_status = pid;
+	close(fd);
 	close(pipefd[1]);
 	waitpid(pid, &g_status, 0);
 	return (pipefd[0]);

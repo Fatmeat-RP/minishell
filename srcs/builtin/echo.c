@@ -21,7 +21,7 @@ static void	looper(char **arg, int i)
 		write(1, arg[i], ft_strlen(arg[i]));
 		i++;
 		if (arg[i])
-			write(1, " ", 2);
+			write(1, " ", 1);
 	}
 	return ;
 }
@@ -37,7 +37,7 @@ int	builtin_echo(char **arg, t_instance *instance)
 	else
 	{
 		looper(arg, i);
-		write(1, "\n", 3);
+		write(1, "\n", 1);
 	}
 	return (0);
 }

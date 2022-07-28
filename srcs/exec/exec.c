@@ -54,7 +54,7 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance, int fd)
 			here_doc(cmd, instance);
 		redir_in_error(cmd);
 		redirect_out(cmd);
-		pid = execve(cmd->cmd[0], cmd->cmd, instance->envp);
+		pid = choose_your_path(cmd, instance, fd);
 		free_exe(cmd);
 		exit(free_instance(instance, pid));
 	}

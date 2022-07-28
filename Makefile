@@ -116,7 +116,7 @@ $(OBJS)		:	$(OBJSDIR)%.o	:	$(SRCSDIR)%.c ${DEPS} Makefile
 clean		:
 			@rm -rf ${OBJSDIR}
 
-fclean		: 	clean
+fclean		: 	clean ${NAME}
 			@rm ${NAME}
 
 re			:	fclean all
