@@ -113,10 +113,10 @@ $(OBJS)		:	$(OBJSDIR)%.o	:	$(SRCSDIR)%.c ${DEPS} Makefile
 			@mkdir -p $(OBJSDIR)utils
 			@${CC} ${CFLAGS} ${HEADER} -c $< -o $@
 
-clean		:
+clean		: ${NAME}
 			@rm -rf ${OBJSDIR}
 
-fclean		: 	clean ${NAME}
+fclean		: 	clean
 			@rm ${NAME}
 
 re			:	fclean all
