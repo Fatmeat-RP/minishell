@@ -37,7 +37,6 @@ SRCS 		=	$(SRCSDIR)parse_to_exec/struct.c\
 				$(SRCSDIR)parsing/ident_cmd.c\
 				$(SRCSDIR)parsing/parse.c\
 				$(SRCSDIR)parsing/parsing.c\
-				$(SRCSDIR)parsing/parsing_printer.c\
 				$(SRCSDIR)parsing/printer_error.c\
 				$(SRCSDIR)parsing/quote_supp.c\
 				$(SRCSDIR)parsing/re_flaggeur.c\

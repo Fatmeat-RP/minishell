@@ -31,5 +31,16 @@ void	sig_int_child_handler(int signum)
 
 void	sig_quit_handler(int signum)
 {
-	printf("\nQuit: %i\n", signum);
+	char	*tmp;
+
+	write(2, "\nQuit: %i\n", signum);
+	tmp = ft_itoa(signum);
+	if (!tmp)
+		write(2, "0\n", 2);
+	else
+	{
+		write(2, tmp, ft_strlen(tmp));
+		write(2, "\n", 1);
+	}
+	free(tmp);
 }

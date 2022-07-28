@@ -14,15 +14,13 @@
 
 t_bool	printer_error(t_control_parse *parsing)
 {
-	char	*error;
-
 	parsing->iter = parsing->first;
 	while (parsing->iter)
 	{
 		if (parsing->iter->flag == PARSE_ERROR)
 		{
-			error = parsing->iter->elem;
-			printf("minishell: %s\n", error);
+			write(2, "minishell: %s\n", 15);
+			write(2, parsing->iter->elem, ft_strlen(parsing->iter->elem));
 			return (false);
 		}
 		parsing->iter = parsing->iter->next;

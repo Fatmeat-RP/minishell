@@ -24,7 +24,7 @@ t_bool	check_last_chev(char *line)
 		return (true);
 	if (line[len] == '<' || line[len] == '>')
 	{
-		printf("syntax error near unexpected token `newline'\n");
+		write(2, "syntax error near unexpected token `newline'\n", 46);
 		return (false);
 	}
 	return (true);

@@ -33,7 +33,7 @@ t_bool	check_consec_pipe(char *line)
 			p = 0;
 		if (p == 2 && q == 0)
 		{
-			printf("minishell: syntax error near unexpected token `|'\n");
+			write(2, "minishell: syntax error near unexpected token `|'\n", 51);
 			return (false);
 		}
 		i++;

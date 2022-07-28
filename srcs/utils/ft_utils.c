@@ -14,13 +14,13 @@
 
 char	*ft_strnstr(const char *s1, char *s2, size_t n)
 {
-	char const  *p;
+	char const	*p;
 
 	p = s1;
 	if (ft_strlen(s2) == 0)
 		return ((char *)s1);
 	while (*p && n)
-	{	
+	{
 		if (ft_memcmp((void *)p, s2, ft_strlen(s2)) == 0 && ft_strlen(s2) <= n)
 			return ((char *)p);
 		p++;
@@ -45,7 +45,7 @@ char	*ft_strfreejoin(char *s1, char *s2)
 		s[i] = s1[i];
 		i++;
 	}
-    free(s1);
+	free(s1);
 	while (i < (j + ft_strlen(s2)))
 	{
 		s[i] = s2[i - j];
@@ -75,7 +75,7 @@ size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 
 int	ft_memcmp(void *s1, void *s2, size_t n)
 {
-	size_t				i;
+	size_t			i;
 	unsigned char	*ss1;
 	unsigned char	*ss2;
 

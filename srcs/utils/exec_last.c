@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-t_exec *exec_last(t_control_exec *lst)
+t_exec	*exec_last(t_control_exec *lst)
 {
 	if (!lst->first)
 		return (NULL);

@@ -12,9 +12,9 @@
 
 #include <minishell.h>
 
-static int redirect_in(t_exec *cmd)
+static int	redirect_in(t_exec *cmd)
 {
-	int i;
+	int	i;
 	int	fd;
 
 	i = 0;
@@ -50,9 +50,7 @@ void	redir_in_error(t_exec *cmd)
 	}
 }
 
-#include <sys/errno.h>
-
-int redirect_out(t_exec *cmd)
+int	redirect_out(t_exec *cmd)
 {
 	int	i;
 	int	fd;
@@ -68,8 +66,6 @@ int redirect_out(t_exec *cmd)
 				fd = open(cmd->out[i], O_CREAT | O_TRUNC | O_WRONLY, 0644);
 			else
 				fd = open(cmd->out[i], O_CREAT | O_APPEND | O_WRONLY, 0644);
-			if (fd < 0)
-				dprintf(2, "debug%s\n ", strerror(errno));
 			i++;
 		}
 		if (fd != -1)
@@ -81,7 +77,7 @@ int redirect_out(t_exec *cmd)
 	return (0);
 }
 
-static int utils_hdoc(t_exec *cmd, int *pipefd)
+static int	utils_hdoc(t_exec *cmd, int *pipefd)
 {
 	char	*line;
 	size_t	tmp;
@@ -104,7 +100,7 @@ static int utils_hdoc(t_exec *cmd, int *pipefd)
 	exit (0);
 }
 
-int here_doc(t_exec *cmd, t_instance *instance)
+int	here_doc(t_exec *cmd, t_instance *instance)
 {
 	int		pipefd[2];
 	pid_t	pid;

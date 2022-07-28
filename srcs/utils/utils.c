@@ -45,7 +45,7 @@ int	line_counter(char **aos)
 	int	i;
 
 	i = 0;
- 	if (!aos)
+	if (!aos)
 		return (0);
 	if (!aos[i])
 		return (0);

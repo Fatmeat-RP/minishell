@@ -21,7 +21,7 @@ t_bool	check_first_pipe(char *line)
 	{
 		if (line[i] == '|')
 		{
-			printf("minishell: syntax error near unexpected token `|\'\n");
+			write(2, "minishell: syntax error near unexpected token `|\'\n", 51);
 			return (false);
 		}
 		i++;

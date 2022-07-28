@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acarle-m <acarle-m@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/28 01:23:27 by acarle-m          #+#    #+#             */
+/*   Updated: 2022/07/28 01:23:27 by acarle-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static t_control_exec	*struct2(t_control_parse *parse, t_control_exec *exec,
@@ -11,15 +23,13 @@ static t_control_exec	*struct2(t_control_parse *parse, t_control_exec *exec,
 		ntom->i = 1;
 	}
 	else if (parse->iter->flag == CMD_FLAG)
-	{
-        exec->iter->cmd[0] = get_path(ft_strdup(parse->iter->elem), envp, 0);
-	}
+		exec->iter->cmd[0] = get_path(ft_strdup(parse->iter->elem), envp, 0);
 	else if (parse->iter->flag == BUILTIN_FLAG)
 	{
 		exec->iter->cmd[0] = ft_strdup(parse->iter->elem);
 		exec->iter->is_builtin = true;
 	}
-    else if (parse->iter->flag == ARGS_FLAG)
+	else if (parse->iter->flag == ARGS_FLAG)
 	{
 		exec->iter->cmd[ntom->i] = ft_strdup(parse->iter->elem);
 		ntom->i++;
@@ -70,9 +80,9 @@ t_control_exec	*structy(t_control_parse *parse, int nb_pipe, char **envp)
 	while (parse->iter)
 	{
 		exec = struct3(parse, struct2(parse, exec, &ntom, envp),
-			&ntom);
-		if (parse->iter->flag == PIPE_FLAG &&
-			parse->iter->next->flag == PIPE_FLAG)
+				&ntom);
+		if (parse->iter->flag == PIPE_FLAG
+			&& parse->iter->next->flag == PIPE_FLAG)
 			parse->iter = parse->iter->next;
 		parse->iter = parse->iter->next;
 	}
@@ -80,4 +90,3 @@ t_control_exec	*structy(t_control_parse *parse, int nb_pipe, char **envp)
 	exec->iter = exec->first;
 	return (exec);
 }
-

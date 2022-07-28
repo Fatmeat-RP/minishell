@@ -1,5 +1,16 @@
-#include <minishell.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acarle-m <acarle-m@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/28 01:23:35 by acarle-m          #+#    #+#             */
+/*   Updated: 2022/07/28 01:23:35 by acarle-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include <minishell.h>
 
 static int	error_export(char *arg)
 {
@@ -22,7 +33,7 @@ static int	is_envp(char *arg, char **envp)
 	varname = get_varname(arg);
 	if (varname == NULL)
 		return (-1);
-	len =  ft_strlen(varname);
+	len = ft_strlen(varname);
 	while (envp[i] != NULL)
 	{
 		if (ft_strncmp(envp[i], varname, len) == 0)
@@ -43,8 +54,8 @@ int	builtin_export(char **arg, t_instance *instance)
 
 	i = 1;
 	if (arg[i] == NULL)
-		return(built_in_env(arg, instance));
-	while(arg[i] != NULL)
+		return (built_in_env(arg, instance));
+	while (arg[i] != NULL)
 	{
 		j = is_envp(arg[i], instance->envp);
 		if (j == -2)

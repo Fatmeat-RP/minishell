@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarle-m <acarle-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acarle-m <acarle-m@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/24 20:21:49 by acarle-m          #+#    #+#             */
-/*   Updated: 2022/07/24 02:36:00 by acarle-m         ###   ########.fr       */
+/*   Created: 2022/07/28 01:23:15 by acarle-m          #+#    #+#             */
+/*   Updated: 2022/07/28 01:23:15 by acarle-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	exec_one_builtin(t_exec *cmd, t_instance *instance)
 		here_doc(cmd, instance);
 	redir_in_error(cmd);
 	redirect_out(cmd);
-	while(instance->builtin->iter->next
+	while (instance->builtin->iter->next
 		&& ft_strncmp(cmd->cmd[0], instance->builtin->iter->name,
 			ft_strlen(instance->builtin->iter->name)) != 0)
 		instance->builtin->iter = instance->builtin->iter->next;
@@ -60,8 +60,7 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance, int fd)
 	}
 	g_status = pid;
 	waitpid(pid, &g_status, 0);
-	close(fd);
-	return (g_status);
+	return (close(fd));
 }
 
 static int	execution_solo(t_exec *cmd, t_instance *instance)
@@ -89,7 +88,7 @@ static int	execution_pipe(t_control_exec *exes, t_instance *instance)
 
 int	chose_exec(t_control_exec *exes, t_instance *instance)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (!exes->first)
@@ -101,4 +100,3 @@ int	chose_exec(t_control_exec *exes, t_instance *instance)
 	exes->iter = exes->first;
 	return (ret);
 }
-

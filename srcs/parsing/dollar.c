@@ -83,31 +83,3 @@ size_t	cpy_value_2(char *dst, char *value, size_t i)
 	}
 	return (i);
 }
-
-size_t	cpy_value(char *s, t_var *var, size_t dellen, char *dst)
-{
-	size_t	i;
-	size_t	j;
-	char	*varname;
-	t_var	*start;
-	char	*itoa_g_status;
-
-	start = var;
-	i = 0;
-	j = 0;
-	varname = find_name(s, dellen, i, j);
-	if (search_value(varname, var) == 2)
-	{
-		itoa_g_status = ft_itoa(g_status);
-		i = cpy_value_2(dst, itoa_g_status, i);
-		free(itoa_g_status);
-	}
-	else if (search_value(varname, var) == 1)
-	{
-		var = node_env(varname, var);
-		i = cpy_value_2(dst, var->value, i);
-	}
-	var = start;
-	free(varname);
-	return (i);
-}

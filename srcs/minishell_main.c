@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-int g_status;
+int	g_status;
 
 static t_builtin	*init_built2(t_builtin *built)
 {
@@ -57,7 +57,7 @@ static t_builtin	*init_builtin(void)
 	return (init_built2(built));
 }
 
-static t_instance *init_minishell(char **envp, int ac, char **av)
+static t_instance	*init_minishell(char **envp, int ac, char **av)
 {
 	t_instance	*instance;
 
@@ -84,21 +84,21 @@ static int	if_line(t_instance *instance)
 	add_history(instance->line);
 	parse = parsing(instance->line, instance->envp);
 	if (control_parse(parse) == -1)
-	    return (-1);
+		return (-1);
 	parse->iter = parse->first;
 	nb_pipe = pipe_counter(parse);
 	exec = structy(parse, nb_pipe, instance->envp);
 	parse->iter = parse->first;
 	cleaner(parse);
 	if (!exec)
-	    return(-1);
+		return (-1);
 	chose_exec(exec, instance);
 	exec_cleaner(exec);
 	instance->builtin->iter = instance->builtin->first;
 	return (0);
 }
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
 	t_instance	*instance;
 

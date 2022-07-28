@@ -16,10 +16,10 @@ int	exit_builtin(char **arg, t_instance *instance)
 {
 	(void)arg;
 	(void)instance;
-	write(2, "exit\n", 5);\
+	write(2, "exit\n", 5);
 	free_instance(instance, 0);
 	rl_clear_history();
-	if (arg[1] != NULL) 
+	if (arg[1] != NULL)
 		exit (ft_atoi(arg[1]));
 	else
 		exit (g_status);

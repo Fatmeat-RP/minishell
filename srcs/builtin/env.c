@@ -22,7 +22,7 @@ int	built_in_env(char **arg, t_instance *instance)
 		return (-1);
 	while (instance->envp[i])
 	{
-		printf("%s\n", instance->envp[i]);
+		write(1, instance->envp[i], ft_strlen(instance->envp[i]));
 		i++;
 	}
 	return (0);

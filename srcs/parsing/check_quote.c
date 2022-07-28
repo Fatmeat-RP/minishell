@@ -51,12 +51,12 @@ t_bool	check_quote(char *line)
 	tok = 0;
 	if (q_counter(line, q, i, tok) == 1)
 	{
-		printf("minishel: syntax error near unexpected token `\'\'\n");
+		write(2, "minishel: syntax error near unexpected token `\'\'\n", 50);
 		return (false);
 	}
 	if (q_counter(line, q, i, tok) == 2)
 	{
-		printf("minishell: syntax error near unexpected token `\"\'\n");
+		write(2, "minishell: syntax error near unexpected token `\"\'\n", 51);
 		return (false);
 	}
 	return (true);
