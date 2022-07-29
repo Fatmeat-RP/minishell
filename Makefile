@@ -101,8 +101,7 @@ OBJS		=	$(SRCS:$(SRCSDIR)%.c=$(OBJSDIR)%.o)
 all			: 	${NAME}
 
 ${NAME}		:	${OBJS} ${DEPS} Makefile
-			@$(CC) $(OBJS) ${CFLAGS} $(HEADER) -o $(NAME) $(LIBS)
-#-g3 -fsanitize=address
+			@$(CC) $(OBJS) ${CFLAGS} $(HEADER) -o $(NAME) $(LIBS) -g3 -fsanitize=address
 
 $(OBJS)		:	$(OBJSDIR)%.o	:	$(SRCSDIR)%.c ${DEPS} Makefile
 			@mkdir -p $(OBJSDIR)
@@ -113,8 +112,10 @@ $(OBJS)		:	$(OBJSDIR)%.o	:	$(SRCSDIR)%.c ${DEPS} Makefile
 			@mkdir -p $(OBJSDIR)utils
 			@${CC} ${CFLAGS} ${HEADER} -c $< -o $@
 
-clean		: ${NAME}
+clean		:
 			@rm -rf ${OBJSDIR}
+
+makeclean	:	${NAME} clean
 
 fclean		: 	clean
 			@rm ${NAME}

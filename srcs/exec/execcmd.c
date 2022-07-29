@@ -12,6 +12,14 @@
 
 #include <minishell.h>
 
+void	set_g_status(char *cmd, int pid)
+{
+	g_status = pid;
+	if (ft_strnstr(cmd, "minishell", 10) == 0)
+		g_status = -g_status;
+	waitpid(pid, &g_status, 0);
+}
+
 int	execuction(t_exec *cmd, t_instance *instance)
 {
 	int	ret;
@@ -62,9 +70,8 @@ int	forklift(t_exec *cmd, t_instance *instance, int fd)
 		redirect_out(cmd);
 		execuction(cmd, instance);
 	}
-	g_status = pid;
 	close(fd);
 	close(pipefd[1]);
-	waitpid(pid, &g_status, 0);
+	set_g_status(cmd->cmd[0], pid);
 	return (pipefd[0]);
 }

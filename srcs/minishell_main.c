@@ -111,7 +111,10 @@ int	main(int ac, char **av, char **envp)
 		if (!instance->line)
 			break ;
 		else if (instance->line[0] != 0)
+		{
 			if_line(instance);
+			free(instance->line);
+		}
 	}
 	write(1, "\n", 1);
 	rl_clear_history();

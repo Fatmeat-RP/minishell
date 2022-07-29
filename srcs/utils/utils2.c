@@ -92,6 +92,8 @@ int	free_instance(t_instance *instance, int i)
 		tmp = instance->builtin->first;
 	}
 	free(instance->builtin);
+	if (instance->line)
+		free(instance->line);
 	free(instance);
 	return (i);
 }

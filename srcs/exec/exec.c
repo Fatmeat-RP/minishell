@@ -54,21 +54,25 @@ static int	exec_one_cmd(t_exec *cmd, t_instance *instance, int fd)
 			here_doc(cmd, instance);
 		redir_in_error(cmd);
 		redirect_out(cmd);
-		pid = choose_your_path(cmd, instance, fd);
+		g_status = choose_your_path(cmd, instance, fd);
 		free_exe(cmd);
-		exit(free_instance(instance, pid));
+		exit(free_instance(instance, g_status));
 	}
-	g_status = pid;
-	waitpid(pid, &g_status, 0);
+	set_g_status(cmd->cmd[0], pid);
 	return (close(fd));
 }
 
 static int	execution_solo(t_exec *cmd, t_instance *instance)
 {
+	int	fd;
+
+	fd = dup(STDIN_FILENO);
 	if (cmd->is_builtin == true)
 		return (exec_one_builtin(cmd, instance));
 	else
 		return (exec_one_cmd(cmd, instance, -1));
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 }
 
 static int	execution_pipe(t_control_exec *exes, t_instance *instance)
@@ -82,6 +86,7 @@ static int	execution_pipe(t_control_exec *exes, t_instance *instance)
 		exes->iter = exes->iter->next;
 	}
 	exec_one_cmd(exes->iter, instance, fd);
+	dup2(fd, STDIN_FILENO);
 	close(fd);
 	return (0);
 }

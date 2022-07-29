@@ -274,5 +274,6 @@ t_var				*node_env(char *varname, t_var *var);
 int					search_value(char *varname, t_var *var);
 size_t				cpy_value_2(char *dst, char *value, size_t i);
 int					choose_your_path(t_exec *cmd, t_instance *instance, int fd);
+void				set_g_status(char *cmd, int pid);
 
 #endif

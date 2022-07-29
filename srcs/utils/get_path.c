@@ -16,11 +16,13 @@ static char	*cmd_bad_access(char *cmd)
 {
 	if (access(cmd, F_OK) == -1)
 	{
+		write(2, "minishell: ", 11);
 		write(2, cmd, ft_strlen(cmd));
 		write(2, ": command not found\n", 20);
 	}
 	else if (access(cmd, X_OK) == -1)
 	{
+		write(2, "minishell: ", 11);
 		write(2, cmd, ft_strlen(cmd));
 		write(2, ": Permission denied\n", 20);
 	}

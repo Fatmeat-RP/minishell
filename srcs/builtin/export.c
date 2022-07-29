@@ -21,6 +21,24 @@ static int	error_export(char *arg)
 	return (-1);
 }
 
+static int	printf_env(char **arg, t_instance *instance)
+{
+	size_t	i;
+
+	(void)arg;
+	i = 0;
+	if (instance->envp == NULL)
+		return (-1);
+	while (instance->envp[i])
+	{
+		write(1, "declare -x ", 11);
+		write(1, instance->envp[i], ft_strlen(instance->envp[i]));
+		write(1, "\n", 1);
+		i++;
+	}
+	return (0);
+}
+
 static int	is_envp(char *arg, char **envp)
 {
 	int		i;
@@ -54,7 +72,7 @@ int	builtin_export(char **arg, t_instance *instance)
 
 	i = 1;
 	if (arg[i] == NULL)
-		return (built_in_env(arg, instance));
+		return (printf_env(arg, instance));
 	while (arg[i] != NULL)
 	{
 		j = is_envp(arg[i], instance->envp);
